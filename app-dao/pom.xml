@@ -3,6 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>app-dao</artifactId>
+    <name>${project.artifactId}</name>
     <packaging>jar</packaging>
 
     <parent>
@@ -10,6 +11,10 @@
         <artifactId>usermanagment</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -19,6 +24,10 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>app-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>app-test</artifactId>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

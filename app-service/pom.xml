@@ -5,6 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>app-service</artifactId>
+    <name>${project.artifactId}</name>
     <packaging>jar</packaging>
 
     <parent>
@@ -29,6 +30,10 @@
         <dependency>
             <groupId>com.epam.brest.course2015</groupId>
             <artifactId>app-service-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.epam.brest.course2015</groupId>
+            <artifactId>app-test</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -57,6 +62,10 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
         </dependency>
     </dependencies>
 

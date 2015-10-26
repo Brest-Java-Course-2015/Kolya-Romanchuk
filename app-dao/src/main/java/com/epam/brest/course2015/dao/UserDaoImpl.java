@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
@@ -18,6 +19,7 @@ import java.util.List;
 
 import static com.epam.brest.course2015.domain.User.UserFields.*;
 
+@Repository
 public class UserDaoImpl implements UserDao {
 
     private static final Logger LOGGER = LogManager.getLogger();
@@ -32,9 +34,11 @@ public class UserDaoImpl implements UserDao {
     @Value("${user.selectById}")
     private String userSelectById;
 
-
     @Value("${user.selectByLogin}")
     private String userSelectByLogin;
+
+    @Value("${user.countUsers}")
+    private String countUser;
 
     @Value("${user.insertUser}")
     private String insertUser;
@@ -56,6 +60,12 @@ public class UserDaoImpl implements UserDao {
         LOGGER.debug("getAllUsers()");
         return jdbcTemplate.query(userSelect, new UserRowMapper());
 
+    }
+
+    @Override
+    public Integer getCountUsers(String login) {
+        LOGGER.debug("getCountUsers(): login = {}", login);
+        return jdbcTemplate.queryForObject(countUser, new String[]{login}, Integer.class);
     }
 
     private class UserRowMapper implements RowMapper<User> {
@@ -82,9 +92,9 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void deleteUser(Integer id) {
-        LOGGER.debug("deleteUser(): {}", id);
-        jdbcTemplate.update(deleteUser, new Object[]{id});
+    public void deleteUser(Integer userId) {
+        LOGGER.debug("deleteUser(): {}", userId);
+        jdbcTemplate.update(deleteUser, new Object[]{userId});
     }
 
     @Override
@@ -108,9 +118,9 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUserById(Integer Id) {
-        LOGGER.debug("getUserById({})", Id);
-        return jdbcTemplate.queryForObject(userSelectById, new Object[]{Id}, new UserRowMapper());
+    public User getUserById(Integer userId) {
+        LOGGER.debug("getUserById({})", userId);
+        return jdbcTemplate.queryForObject(userSelectById, new Object[]{userId}, new UserRowMapper());
     }
 
 
