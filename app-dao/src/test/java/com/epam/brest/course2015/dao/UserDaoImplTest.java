@@ -1,6 +1,8 @@
 package com.epam.brest.course2015.dao;
 
 import com.epam.brest.course2015.domain.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 import java.util.List;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -19,6 +22,8 @@ import static org.junit.Assert.assertTrue;
 @ContextConfiguration(locations = {"classpath*:test-spring-dao.xml"})
 @Transactional()
 public class UserDaoImplTest {
+
+    private static final Logger LOGGER = LogManager.getLogger(UserDaoImplTest.class);
 
     public static final String USER_LOGIN1 = "userLogin1";
     public static final String USER_PASSWORD1 = "userPassword1";
@@ -57,7 +62,10 @@ public class UserDaoImplTest {
         assertNotNull(newUser);
         assertTrue(user.getLogin().equals(newUser.getLogin()));
         assertTrue(user.getPassword().equals(newUser.getPassword()));
+        LOGGER.debug(">> Get update date: " + newUser.getUpdatedDate() + newUser.getUpdatedDate().getClass());
+        LOGGER.debug(">> Get new user date: " + user.getUpdatedDate() +  user.getUpdatedDate().getClass());
         assertTrue(user.getUpdatedDate().equals(newUser.getUpdatedDate()));
+
         assertNotNull(newUser.getCreatedDate());
     }
 

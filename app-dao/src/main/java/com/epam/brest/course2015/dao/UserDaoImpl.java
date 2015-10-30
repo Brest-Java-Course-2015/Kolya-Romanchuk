@@ -1,9 +1,11 @@
 package com.epam.brest.course2015.dao;
 
 import com.epam.brest.course2015.domain.User;
+import com.epam.brest.course2015.dto.UserDto;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -46,6 +48,9 @@ public class UserDaoImpl implements UserDao {
     @Value("${user.updateUser}")
     private String updateUser;
 
+    @Value("${user.totalUsersCount}")
+    private String totalUsersCountSql;
+
     @Value("${user.deleteUser}")
     private String deleteUser;
 
@@ -54,11 +59,15 @@ public class UserDaoImpl implements UserDao {
         namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
     }
 
+    public Integer getTotalUsersCount() {
+        LOGGER.debug("getTotalUsersCount()");
+        return jdbcTemplate.queryForObject(totalUsersCountSql, Integer.class);
+    }
 
     @Override
     public List<User> getAllUsers() {
         LOGGER.debug("getAllUsers()");
-        return jdbcTemplate.query(userSelect, new UserRowMapper());
+        return jdbcTemplate.query(userSelect, new BeanPropertyRowMapper<User>(User.class));
 
     }
 
@@ -114,13 +123,15 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getUserByLogin(String login) {
         LOGGER.debug("getUserByLogin({})", login);
-        return jdbcTemplate.queryForObject(userSelectByLogin, new Object[]{login}, new UserRowMapper());
+        return jdbcTemplate.queryForObject(userSelectByLogin, new Object[]{login},
+                                            new BeanPropertyRowMapper<User>(User.class));
     }
 
     @Override
     public User getUserById(Integer userId) {
         LOGGER.debug("getUserById({})", userId);
-        return jdbcTemplate.queryForObject(userSelectById, new Object[]{userId}, new UserRowMapper());
+        return jdbcTemplate.queryForObject(userSelectById, new Object[]{userId},
+                                            new UserRowMapper());
     }
 
 
