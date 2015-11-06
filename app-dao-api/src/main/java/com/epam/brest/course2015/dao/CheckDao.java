@@ -10,7 +10,7 @@ import java.util.List;
 public interface CheckDao {
 
     public List<Check> getAllChecks();
-    public Integer addCheck(Check user);
+    public Integer addCheck(Check check);
     public void deleteCheck(Integer id_check);
     public void updateCheck(Check check);
     public Check getCheckById(Integer id_check);

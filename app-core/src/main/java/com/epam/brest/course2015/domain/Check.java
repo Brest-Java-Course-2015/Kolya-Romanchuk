@@ -17,10 +17,11 @@ public class Check {
     public Check(){
     }
 
-    public Check(Integer id_check, Integer checknumber, Integer summa){
+    public Check(Integer id_check, Integer checknumber, Integer summa, Integer id_transaction){
         this.id_check = id_check;
         this.checknumber = checknumber;
         this.summa = summa;
+        this.id_transaction = id_transaction;
     }
 
     public Integer getId_check() {
@@ -53,5 +54,23 @@ public class Check {
 
     public void setId_transaction(Integer id_transaction) {
         this.id_transaction = id_transaction;
+    }
+
+    public static enum CheckField{
+        ID_CHEK("id_check"),
+        CHECKNUMBER("checknumber"),
+        SUMMA("summa"),
+        ID_TRANSACTION("id_transaction");
+
+        private final String value;
+
+         CheckField(String value){
+            this.value = value;
+        }
+
+        public String getValue(){
+            return this.value;
+        }
+
     }
 }
