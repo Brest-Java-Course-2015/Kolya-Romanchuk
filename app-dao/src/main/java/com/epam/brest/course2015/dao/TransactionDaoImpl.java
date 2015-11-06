@@ -1,6 +1,8 @@
 package com.epam.brest.course2015.dao;
 
 import com.epam.brest.course2015.domain.Transaction;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,6 +19,8 @@ import static com.epam.brest.course2015.domain.Transaction.TransactionFields.*;
  * Created by user on 06.11.15.
  */
 public class TransactionDaoImpl implements TransactionDao {
+
+    private final Logger LOGGER = LogManager.getLogger();
 
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -39,20 +43,24 @@ public class TransactionDaoImpl implements TransactionDao {
     }
 
     public List<Transaction> getAllTransactions() {
+        LOGGER.debug("getAllTransactions");
         return jdbcTemplate.query(transactionSelect,new BeanPropertyRowMapper<Transaction>(Transaction.class));
     }
 
     public Integer addTransaction(Transaction transaction) {
+        LOGGER.debug("addTransaction");
         KeyHolder keyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(transactionInsert,getParametersMap(transaction),keyHolder);
         return keyHolder.getKey().intValue();
     }
 
     public void deleteTransaction(Integer id_transaction) {
+        LOGGER.debug("deleteTransaction");
         jdbcTemplate.update(transactionDelete, new Object[]{id_transaction});
     }
 
     public Transaction getTransactionById(Integer id_transaction) {
+        LOGGER.debug("getTransactionById");
         return jdbcTemplate.queryForObject(tranasctionSelectById, new Object[]{id_transaction},
                 new BeanPropertyRowMapper<Transaction>(Transaction.class));
     }

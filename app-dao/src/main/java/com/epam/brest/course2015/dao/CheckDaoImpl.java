@@ -1,6 +1,8 @@
 package com.epam.brest.course2015.dao;
 
 import com.epam.brest.course2015.domain.Check;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -18,6 +20,8 @@ import static com.epam.brest.course2015.domain.Check.CheckField.*;
  * Created by user on 06.11.15.
  */
 public class CheckDaoImpl implements CheckDao {
+
+    private final Logger LOGGER = LogManager.getLogger();
 
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -46,29 +50,35 @@ public class CheckDaoImpl implements CheckDao {
     }
 
     public List<Check> getAllChecks() {
+        LOGGER.debug("getAllChecks");
         return jdbcTemplate.query(checkSelect,new BeanPropertyRowMapper<Check>(Check.class));
     }
 
     public Integer addCheck(Check check) {
+        LOGGER.debug("addCheck");
         KeyHolder keyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(checkInsert, getParametersMap(check),keyHolder);
         return keyHolder.getKey().intValue();
     }
 
     public void deleteCheck(Integer id_check) {
+        LOGGER.debug("deleteCheck");
         jdbcTemplate.update(checkDelete, new Object[]{id_check});
     }
 
     public void updateCheck(Check check) {
+        LOGGER.debug("updateCheck");
         jdbcTemplate.update(checkUpdate, new Object[]{check.getSumma()});
     }
 
     public Check getCheckById(Integer id_check) {
+        LOGGER.debug("getCheckById");
         return jdbcTemplate.queryForObject(checkSelectById, new Object[]{id_check},
                 new BeanPropertyRowMapper<Check>(Check.class));
     }
 
     public Check getCheckByCheckNumder(Integer cheknumber) {
+        LOGGER.debug("getCheckByCheckNumder");
         return jdbcTemplate.queryForObject(checkSelectByNumber, new Object[]{cheknumber},
                 new BeanPropertyRowMapper<Check>(Check.class));
     }

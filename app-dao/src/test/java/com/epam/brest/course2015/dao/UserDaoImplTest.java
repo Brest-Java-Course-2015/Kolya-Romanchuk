@@ -1,6 +1,8 @@
 package com.epam.brest.course2015.dao;
 
 import com.epam.brest.course2015.domain.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
 
 import static org.junit.Assert.*;
 
@@ -20,6 +23,8 @@ import static org.junit.Assert.*;
 @Transactional()
 public class UserDaoImplTest {
 
+    private final Logger LOGGER = LogManager.getLogger();
+
     private final User user = new User(null, "login3", "password3", "firstname3", "secondname3");
 
 //    private final String LOGIN = "login3";
@@ -30,6 +35,7 @@ public class UserDaoImplTest {
 
     @Test
     public void testGetAllUsers() throws Exception {
+        LOGGER.debug("test: getAllUsers");
         List<User> users = userDao.getAllUsers();
         assertTrue(users.size() == 2);
 
@@ -37,6 +43,7 @@ public class UserDaoImplTest {
 
     @Test
     public void testAddUser() throws Exception {
+        LOGGER.debug("test: addUser");
         Integer id_user = userDao.addUser(user);
         assertNotNull(id_user);
         User newUser = userDao.getUserById(id_user);
@@ -48,6 +55,7 @@ public class UserDaoImplTest {
 
     @Test
     public void testDeleteUser() throws Exception {
+        LOGGER.debug("test: DeleteUser");
         List<User> users = userDao.getAllUsers();
         Integer usersSize = users.size();
         assertTrue(users.size() > 0);

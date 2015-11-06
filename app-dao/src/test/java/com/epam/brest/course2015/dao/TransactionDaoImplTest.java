@@ -1,6 +1,8 @@
 package com.epam.brest.course2015.dao;
 
 import com.epam.brest.course2015.domain.Transaction;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,8 @@ import static org.junit.Assert.*;
 @Transactional()
 public class TransactionDaoImplTest {
 
+    private final Logger LOGGER = LogManager.getLogger();
+
     @Autowired
     private TransactionDao transactionDao;
 
@@ -27,12 +31,14 @@ public class TransactionDaoImplTest {
 
     @Test
     public void testGetAllTransactions() throws Exception {
+        LOGGER.debug("test: getAllTransactions");
         List<Transaction> transactions = transactionDao.getAllTransactions();
         assertTrue(transactions.size() == 2);
     }
 
     @Test
     public void testAddTransaction() throws Exception {
+        LOGGER.debug("test: addTransaction");
         Integer id_transaction = transactionDao.addTransaction(tran);
         assertNotNull(id_transaction);
         Transaction newTransaction = transactionDao.getTransactionById(id_transaction);
@@ -44,6 +50,7 @@ public class TransactionDaoImplTest {
 
     @Test
     public void testDeleteTransaction() throws Exception {
+        LOGGER.debug("test: deleteTransaction");
         List<Transaction> transactions = transactionDao.getAllTransactions();
         assertTrue(transactions.size() > 0);
         int sizeBefore = transactions.size();
