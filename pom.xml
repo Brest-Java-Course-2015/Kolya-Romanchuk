@@ -16,6 +16,8 @@
         <module>app-dao</module>
         <module>app-service-api</module>
         <module>app-service</module>
+        <module>app-test</module>
+        <module>app-rest</module>
     </modules>
 
     <properties>
@@ -24,6 +26,7 @@
         <spring.version>4.2.1.RELEASE</spring.version>
         <hsqldb.version>2.3.3</hsqldb.version>
         <easymock.version>3.2</easymock.version>
+        <jackson.databind-version>2.4.3</jackson.databind-version>
     </properties>
 
     <dependencyManagement>
@@ -51,6 +54,17 @@
             <dependency>
                 <groupId>com.epam.brest.course2015</groupId>
                 <artifactId>app-service</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.epam.brest.course2015</groupId>
+                <artifactId>app-test</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.epam.brest.course2015</groupId>
+                <artifactId>app-rest</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
@@ -110,6 +124,22 @@
                 <artifactId>easymock</artifactId>
                 <version>${easymock.version}</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>3.1.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>jstl</artifactId>
+                <version>1.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.databind-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
