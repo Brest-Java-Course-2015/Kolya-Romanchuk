@@ -50,6 +50,22 @@
         <property name="userDao" ref="userDao"/>
     </bean>
 
+    <bean id="checkDao" class="com.epam.brest.course2015.dao.CheckDaoImpl">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <bean id="checkService" class="com.epam.brest.course2015.service.CheckServiceImpl">
+        <property name="checkDao" ref="checkDao"/>
+    </bean>
+
+    <bean id="transactionDao" class="com.epam.brest.course2015.dao.TransactionDaoImpl">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <bean id="transactionService" class="com.epam.brest.course2015.service.TransactionServiceImpl">
+        <property name="transactionDao" ref="transactionDao"/>
+    </bean>
+
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="messageConverters">
             <list>
