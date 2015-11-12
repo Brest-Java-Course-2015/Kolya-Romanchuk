@@ -37,6 +37,8 @@ public class UserDaoImplTest {
     public void testGetAllUsers() throws Exception {
         LOGGER.debug("test: getAllUsers");
         List<User> users = userDao.getAllUsers();
+        LOGGER.debug(">> Lastname 1 = {} ", users.get(0).getLastname());
+        LOGGER.debug(">> Lastname 2 = {} ", users.get(1).getLastname());
         assertTrue(users.size() == 2);
 
     }
@@ -50,7 +52,7 @@ public class UserDaoImplTest {
         assertEquals(user.getLogin(), newUser.getLogin());
         assertEquals(user.getPassword(), newUser.getPassword());
         assertEquals(user.getFirstname(), newUser.getFirstname());
-        assertEquals(user.getSecondname(), newUser.getSecondname());
+        assertEquals(user.getLastname(), newUser.getLastname());
     }
 
     @Test

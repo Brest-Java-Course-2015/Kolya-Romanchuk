@@ -18,16 +18,19 @@ public class Transaction {
 
     private Integer summa;
 
+    private Integer id_check;
+
     public Transaction(){
     }
 
     public Transaction(Integer id_transaction, Integer checknumbersender,Integer checknumberrecipient,
-                       Integer summa, Date date){
+                       Integer summa, Date date, Integer id_check){
         this.id_transaction = id_transaction;
         this.checknumbersender = checknumbersender;
         this.checknumberrecipient = checknumberrecipient;
         this.summa = summa;
         this.date = date;
+        this.id_check = id_check;
     }
 
     public Integer getId_transaction() {
@@ -70,13 +73,22 @@ public class Transaction {
         this.summa = summa;
     }
 
+    public Integer getId_check() {
+        return id_check;
+    }
+
+    public void setId_check(Integer id_check) {
+        this.id_check = id_check;
+    }
+
     public static enum TransactionFields{
 
         ID_TRANSACTION("id_transaction"),
         CHECKNUMBERSENDER ("checknumbersender"),
         CHECKNUMBERRECIPIENT("checknumberrecipient"),
         SUMMA("summa"),
-        DATE("date");
+        DATE("date"),
+        ID_CHECK("id_check");
 
         TransactionFields(String value){
             this.value = value;

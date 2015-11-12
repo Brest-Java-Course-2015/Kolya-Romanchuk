@@ -32,7 +32,7 @@ public class CheckRestController {
     @RequestMapping(value = "/check", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
     public @ResponseBody Integer addCheck(@RequestBody Check check){
-        LOGGER.debug("addCheck(): check_id = {} ",check.getId_transaction());
+        LOGGER.debug("addCheck(): check_id = {} ",check.getId_check());
         return checkService.addCheck(check);
     }
 
@@ -60,7 +60,7 @@ public class CheckRestController {
     @RequestMapping(value = "/check/update",method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public @ResponseBody void updateCheck(@RequestBody Check check){
-        LOGGER.debug("updateCheck(): check_id = {} ",check.getId_transaction());
+        LOGGER.debug("updateCheck(): check_id = {} ",check.getId_check());
         checkService.updateCheck(check);
     }
 

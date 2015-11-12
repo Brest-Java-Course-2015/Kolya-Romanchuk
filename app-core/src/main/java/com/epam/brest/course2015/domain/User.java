@@ -14,35 +14,25 @@ public class User {
 
     private String firstname;
 
-    private String secondname;
-
-    private Integer id_check;
+    private String lastname;
 
     public User(){
     }
 
-    public User(Integer id_user, String login, String password, String firstname, String secondname){
+    public User(Integer id_user, String login, String password, String firstname, String lastname){
         this.id_user = id_user;
         this.login = login;
         this.password = password;
         this.firstname = firstname;
-        this.secondname = secondname;
+        this.lastname = lastname;
     }
 
-    public Integer getId_check() {
-        return id_check;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setId_check(Integer id_check) {
-        this.id_check = id_check;
-    }
-
-    public String getSecondname() {
-        return secondname;
-    }
-
-    public void setSecondname(String secondname) {
-        this.secondname = secondname;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getFirstname() {
@@ -82,8 +72,7 @@ public class User {
         LOGIN ("login"),
         PASSWORD ("password"),
         FIRSTNAME ("firstname"),
-        SECONDNAME ("secondname"),
-        ID_CHECK ("id_check");
+        LASTNAME ("lastname");
 
         UserFields(String value) {
             this.value = value;

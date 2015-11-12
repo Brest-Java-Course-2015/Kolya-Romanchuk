@@ -27,7 +27,7 @@ public class TransactionDaoImplTest {
     @Autowired
     private TransactionDao transactionDao;
 
-    private static Transaction tran= new Transaction(null,1234567,13456487,20054,null);
+    private static Transaction tran= new Transaction(null,1234567,13456487,20054, null, 2);
 
     @Test
     public void testGetAllTransactions() throws Exception {

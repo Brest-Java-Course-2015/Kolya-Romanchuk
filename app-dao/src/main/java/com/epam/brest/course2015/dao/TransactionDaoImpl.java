@@ -72,6 +72,7 @@ public class TransactionDaoImpl implements TransactionDao {
         parameterSource.addValue(CHECKNUMBERRECIPIENT.getValue(), transaction.getChecknumberrecipient());
         parameterSource.addValue(SUMMA.getValue(), transaction.getSumma());
         parameterSource.addValue(DATE.getValue(), transaction.getDate());
+        parameterSource.addValue(ID_CHECK.getValue(), transaction.getId_check());
         return parameterSource;
     }
 }

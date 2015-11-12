@@ -22,7 +22,7 @@ public class CheckServiceImplTest {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    private final Check check = new Check(null, 134879, 46554654, null);
+    private final Check check = new Check(null, 134879, 46554654, 2);
 
     private final Integer CHEKNUMBER = 1234;
 

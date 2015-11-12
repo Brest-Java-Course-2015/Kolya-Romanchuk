@@ -61,7 +61,7 @@ public class TransactionControllerMockTest {
     @Test
     public void testGetAllTransactions() throws Exception{
         expect(transactionService.getAllTransactions())
-                .andReturn(Arrays.<Transaction>asList(new Transaction(1, 12345, 4564564, 1213213, null)));
+                .andReturn(Arrays.<Transaction>asList(new Transaction(1, 12345, 4564564, 1213213, null,2)));
         replay(transactionService);
         LOGGER.debug("test: getAllTransactions()");
 
@@ -75,7 +75,7 @@ public class TransactionControllerMockTest {
         replay(transactionService);
         LOGGER.debug("test: addTransaction()");
 
-        String transaction = new ObjectMapper().writeValueAsString(new Transaction(1,123,1546,1564,null));
+        String transaction = new ObjectMapper().writeValueAsString(new Transaction(1,123,1546,1564,null, 2));
 
         mockMvc.perform(post("/transaction").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON)
                 .content(transaction)).andDo(print())
@@ -84,7 +84,7 @@ public class TransactionControllerMockTest {
 
     @Test
     public void testGetTransactionById() throws Exception{
-        expect(transactionService.getTransactionById(anyInt())).andReturn(new Transaction(1,132415,1231,1231234,null));
+        expect(transactionService.getTransactionById(anyInt())).andReturn(new Transaction(1,132415,1231,1231234,null, 2));
         replay(transactionService);
         LOGGER.debug("test: getTransactionById()");
 

@@ -23,7 +23,7 @@ public class TransactionServiceImplTest {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    private final Transaction transaction = new Transaction(null, 123456, 546546, 20000, null);
+    private final Transaction transaction = new Transaction(null, 123456, 546546, 20000, null, 3);
 
     @Autowired
     private TransactionService transactionService;

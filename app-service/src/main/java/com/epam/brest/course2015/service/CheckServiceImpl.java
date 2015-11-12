@@ -36,6 +36,7 @@ public class CheckServiceImpl implements CheckService {
         Assert.isNull(check.getId_check(), "Id Check should be null");
         Assert.notNull(check.getChecknumber(), "Check Number should not be null");
         Assert.notNull(check.getSumma(), "Summa Check should not be null");
+        Assert.notNull(check.getId_user(),"Id_user Check should not be null");
         return checkDao.addCheck(check);
     }
 
@@ -72,6 +73,6 @@ public class CheckServiceImpl implements CheckService {
 
     @Override
     public void logCheck(Check check) {
-        LOGGER.debug("logCheck(): id_check = {}", check.getId_transaction());
+        LOGGER.debug("logCheck(): id_check = {}", check.getId_check());
     }
 }

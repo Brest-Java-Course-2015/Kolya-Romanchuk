@@ -20,16 +20,11 @@ public class UserTest {
         user = new User();
     }
 
-    @Test
-    public void testGetId_check() throws Exception {
-        user.setId_check(1);
-        assertEquals(user.getId_check(),(Integer)1);
-    }
 
     @Test
     public void testGetSecondname() throws Exception {
-        user.setSecondname("secondname");
-        assertEquals(user.getSecondname(), "secondname");
+        user.setLastname("secondname");
+        assertEquals(user.getLastname(), "secondname");
     }
 
     @Test

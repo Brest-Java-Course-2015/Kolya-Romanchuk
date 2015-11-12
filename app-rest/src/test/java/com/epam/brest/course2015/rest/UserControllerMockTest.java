@@ -67,7 +67,7 @@ public class UserControllerMockTest {
 
     @Test
     public void testGetAllUsers() throws Exception {
-        expect(userService.getAllUsers()).andReturn(Arrays.<User>asList(new User(1,"l","p","f","s")));
+        expect(userService.getAllUsers()).andReturn(Arrays.<User>asList(new User(1,"l","p","f","l")));
         replay(userService);
         LOGGER.debug("test: getAllUsers()");
         mockMvc.perform(
@@ -83,7 +83,7 @@ public class UserControllerMockTest {
         replay(userService);
         LOGGER.debug("test: addUser()");
 
-        String user = new ObjectMapper().writeValueAsString(new User(1,"l","p","f","s"));
+        String user = new ObjectMapper().writeValueAsString(new User(1,"l","p","f","l"));
 
         mockMvc.perform(post("/user").accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON).content(user)).andDo(print())
@@ -93,7 +93,7 @@ public class UserControllerMockTest {
 
     @Test
     public void testGetUserByLogin() throws Exception{
-        expect(userService.getUserByLogin(anyObject(String.class))).andReturn(new User(1, "l", "p", "f", "s"));
+        expect(userService.getUserByLogin(anyObject(String.class))).andReturn(new User(1, "l", "p", "f", "l"));
         replay(userService);
         LOGGER.debug("test: getUserByLogin()");
         mockMvc.perform(get("/user/l").accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
@@ -101,7 +101,7 @@ public class UserControllerMockTest {
 
     @Test
     public void testGetUserById() throws Exception{
-        expect(userService.getUserById(anyObject(Integer.class))).andReturn(new User(1, "l", "p", "f", "s"));
+        expect(userService.getUserById(anyObject(Integer.class))).andReturn(new User(1, "l", "p", "f", "l"));
         replay(userService);
         LOGGER.debug("test: getUserById()");
         mockMvc.perform(get("/user/id/1").accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());

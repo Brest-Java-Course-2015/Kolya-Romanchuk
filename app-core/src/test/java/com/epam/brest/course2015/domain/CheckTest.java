@@ -40,7 +40,7 @@ public class CheckTest {
 
     @Test
     public void testGetId_transaction() throws Exception {
-        check.setId_transaction(1);
-        assertEquals(check.getId_transaction(), (Integer)1);
+        check.setId_user(1);
+        assertEquals(check.getId_user(), (Integer)1);
     }
 }

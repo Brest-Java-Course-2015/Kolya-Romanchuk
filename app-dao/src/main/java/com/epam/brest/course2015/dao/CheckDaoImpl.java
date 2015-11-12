@@ -6,12 +6,15 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
 import javax.sql.DataSource;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import static com.epam.brest.course2015.domain.Check.CheckField.*;
@@ -83,12 +86,13 @@ public class CheckDaoImpl implements CheckDao {
                 new BeanPropertyRowMapper<Check>(Check.class));
     }
 
+
     private MapSqlParameterSource getParametersMap(Check check) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue(ID_CHEK.getValue(),check.getId_check());
         parameterSource.addValue(CHECKNUMBER.getValue(),check.getChecknumber() );
         parameterSource.addValue(SUMMA.getValue(),check.getSumma());
-        parameterSource.addValue(ID_TRANSACTION.getValue(),check.getId_transaction());
+        parameterSource.addValue(ID_USER.getValue(),check.getId_user());
         return parameterSource;
     }
 }

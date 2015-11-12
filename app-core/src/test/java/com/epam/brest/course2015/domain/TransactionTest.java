@@ -51,4 +51,10 @@ public class TransactionTest {
         transaction.setSumma(1);
         assertEquals(transaction.getSumma(),(Integer)1);
     }
+
+    @Test
+    public void testGetIdCheck() throws Exception{
+        transaction.setId_check(1);
+        assertEquals(transaction.getId_check(),(Integer)1);
+    }
 }

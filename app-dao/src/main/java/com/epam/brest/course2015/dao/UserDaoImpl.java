@@ -6,15 +6,19 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
 import javax.sql.DataSource;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import static com.epam.brest.course2015.domain.User.UserFields.*;
+
 /**
  * Created by user on 06.11.15.
  */
@@ -26,7 +30,7 @@ public class UserDaoImpl implements UserDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Value("${user.select}")
-    private String userkSelect;
+    private String userSelect;
 
     @Value("${user.insert}")
     private String userInsert;
@@ -50,7 +54,7 @@ public class UserDaoImpl implements UserDao {
 
     public List<User> getAllUsers() {
         LOGGER.debug("getAllUsers");
-        return jdbcTemplate.query(userkSelect, new BeanPropertyRowMapper<User>(User.class));
+        return jdbcTemplate.query(userSelect, new BeanPropertyRowMapper<User>(User.class));
     }
 
     public Integer addUser(User user) {
@@ -85,8 +89,7 @@ public class UserDaoImpl implements UserDao {
         parameterSource.addValue(LOGIN.getValue(),user.getLogin());
         parameterSource.addValue(PASSWORD.getValue(),user.getPassword());
         parameterSource.addValue(FIRSTNAME.getValue(),user.getFirstname());
-        parameterSource.addValue(SECONDNAME.getValue(),user.getSecondname());
-        parameterSource.addValue(ID_CHECK.getValue(),user.getId_check());
+        parameterSource.addValue(LASTNAME.getValue(),user.getLastname());
         return parameterSource;
     }
 }

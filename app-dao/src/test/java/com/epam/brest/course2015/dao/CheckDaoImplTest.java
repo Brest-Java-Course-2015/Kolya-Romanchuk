@@ -28,7 +28,7 @@ public class CheckDaoImplTest {
 
     private final Integer SUMMA = 2134456;
 
-    private final Check check = new Check(null, 13454897, 123443, null);
+    private final Check check = new Check(null, 13454897, 123443, 2);
 
     @Autowired CheckDao checkDao;
 
