@@ -1,0 +1,19 @@
+.form-user{
+    clear:both;
+    text-align:right;
+}
+.form-check{
+    clear:both;
+    text-align:right;
+}
+label {
+    float:left;
+}
+
+.form-user{
+    float:left;
+}
+
+.form-check{
+    float:left;
+}

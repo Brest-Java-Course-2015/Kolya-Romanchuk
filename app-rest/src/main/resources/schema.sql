@@ -21,7 +21,6 @@ CREATE TABLE check
 	checknumber INT NOT NULL,
 	summa INT NOT NULL,
 	id_user INT NOT NULL
---	CONSTRAINT fk_check_transaction FOREIGN KEY (id_transaction) REFERENCES transactions (id)
 );
 
 CREATE TABLE user (
@@ -31,6 +30,4 @@ CREATE TABLE user (
   -- enabled boolean NOT NULL,
   firstname VARCHAR(50),
   lastname VARCHAR(50)
-
---  CONSTRAINT fk_user_check FOREIGN KEY (id_check) REFERENCES check (id)
 );

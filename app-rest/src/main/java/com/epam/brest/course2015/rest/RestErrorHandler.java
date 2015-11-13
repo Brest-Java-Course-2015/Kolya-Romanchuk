@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-/**
- * Created by xalf on 26/10/15.
- */
 @ControllerAdvice
 public class RestErrorHandler {
 

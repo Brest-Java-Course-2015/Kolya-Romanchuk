@@ -12,9 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by berdachuk on 10/28/15.
- */
 public class OptionsFilter implements Filter {
 
     public void init(FilterConfig filterConfig) throws ServletException {
