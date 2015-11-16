@@ -59,6 +59,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Integer logingUser(String login, Integer password) {
+        User user = getUserByLogin(login);
+        if (user != null) {
+            if (password == password) {
+                return user.getId_user();
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+    @Override
     public Integer addUser(User user) {
         Assert.notNull(user, "User should not be null.");
         LOGGER.debug("addUser(): user login = {} ",user.getLogin());
@@ -67,4 +80,6 @@ public class UserServiceImpl implements UserService {
         Assert.hasText(user.getPassword(), "Password user should not be null.");
         return userDao.addUser(user);
     }
+
+
 }

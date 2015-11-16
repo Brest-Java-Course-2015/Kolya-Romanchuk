@@ -27,7 +27,7 @@ public class UserDaoImplTest {
 
     private final User user = new User(null, "login3", "password3", "firstname3", "secondname3");
 
-//    private final String LOGIN = "login3";
+    private final String LOGIN = "login1";
 
 
     @Autowired

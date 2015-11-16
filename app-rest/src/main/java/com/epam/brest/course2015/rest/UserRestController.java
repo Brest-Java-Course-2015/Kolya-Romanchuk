@@ -56,4 +56,10 @@ public class UserRestController {
         userService.deleteUser(Id);
     }
 
+    @RequestMapping(value = "/loging", method = RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.OK)
+    public @ResponseBody Integer loggingUser(@RequestBody String login, @RequestBody Integer password){
+        return userService.logingUser(login,password);
+    }
+
 }

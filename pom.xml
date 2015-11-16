@@ -68,6 +68,11 @@
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
+                <groupId>com.epam.brest.course2015</groupId>
+                <artifactId>app-termclient</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
                 <version>${spring.version}</version>

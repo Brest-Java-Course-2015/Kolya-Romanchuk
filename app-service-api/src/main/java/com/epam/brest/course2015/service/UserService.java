@@ -15,5 +15,5 @@ public interface UserService {
     public User getUserById(Integer id_user);
     public User getUserByLogin(String login);
     public void logUser(User user);
-
+    public Integer logingUser(String login, Integer password);
 }
