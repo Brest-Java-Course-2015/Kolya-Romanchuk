@@ -1,4 +1,6 @@
-var URL_CHECKS_LIST = "http://localhost:8080/rest/checks";
+var PROTOCOL = "http://";
+var HOST = "localhost:8080";
+var URL_CHECKS_LIST = "/rest/checks";
 
 findAll();
 
@@ -6,7 +8,7 @@ function findAll() {
     console.log('findAll');
     $.ajax({
         type: 'GET',
-        url: URL_CHECKS_LIST,
+        url: PROTOCOL+HOST+URL_CHECKS_LIST,
         dataType: "json",
         success: renderList,
         error: function(jqXHR, textStatus, errorThrown) {

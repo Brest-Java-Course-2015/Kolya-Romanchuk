@@ -12,6 +12,8 @@
 
     <link href="css/dashboard.css" rel="stylesheet">
 
+    <link href="css/aligment.css" rel="stylesheet">
+
 
 </head>
 <body>
@@ -25,7 +27,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Администратор</a>
+            <a class="navbar-brand" onclick="location.href='administration.html'">Администратор</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -39,14 +41,45 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="#">Все пользователи <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Новый пользователь</a></li>
-                <li><a href="#">Новый счет</a></li>
+                <li onclick="location.href='administration.html'" class="active"><a href="administration.html">Все пользователи <span class="sr-only">(current)</span></a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-            <h2>Список счетов:</h2>
+            <h2 class="name-table">Список пользователей:</h2>
+            <button id="addUserTable" type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target=".bs-example-modal-sm">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Создать пользователя
+            </button>
+            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="moadal-header">
+                            <h4 class="modal-title" id="myModalLabel" align="center">Создание пользователя:</h4>
+                        </div>
+                        <div class="modal-body">
+                            <from id="newUser">
+                                <div class="form-user">
+                                    <label>Логин:</label>
+                                    <input id="userLogin" name="userLogin" type="text">
+                                    <p/>
+                                    <label>Пароль:</label>
+                                    <input id="userPassword" name="userPassword" type="text">
+                                    <p/>
+                                    <label>Имя:</label>
+                                    <input id="userFirstname" name="userFirstname" type="text">
+                                    <p/>
+                                    <label>Фамилия:</label>
+                                    <input id="userLastname" name="userLastname" type="text">
+                                </div>
+                            </from>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                            <button class="btn btn-primary"  id="btnAddUser">Зарегистрировать</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -64,6 +97,13 @@
                         <td>User1</td>
                         <td>Firstname1</td>
                         <td>Lastname1</td>
+                        <td>
+                            <!--<button id="deleteUser" type="button" class="btn btn-default btn-xs">-->
+                           <a onclick="button" id="deleteUser" > <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> </a>
+                            <!--</button>-->
+
+                        </td>
+
                     </tr>
                     </tbody>
                 </table>

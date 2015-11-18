@@ -1,4 +1,6 @@
-var URL_NEWUSER_ADD = "http://localhost:8080/rest/user";
+var PROTOCOL = "http://";
+var HOST = "localhost:8080";
+var URL_NEWUSER_ADD = "/rest/user";
 //var URL_PROOF= "http://localhost:8080/rest/user/";
 
 
@@ -14,7 +16,7 @@ function addUser() {
     $.ajax({
         type: 'POST',
         contentType: 'application/json',
-        url: URL_NEWUSER_ADD,
+        url: PROTOCOL+HOST+URL_NEWUSER_ADD,
         dataType: "json",
         data: formToJSON(),
         success: function (data, textStatus, jqXHR) {

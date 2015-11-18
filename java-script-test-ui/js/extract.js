@@ -1,4 +1,6 @@
-var URL_TRANSACTION_LIST = "http://localhost:8080/rest/transactions";
+var PROTOCOL = "http://";
+var HOST = "localhost:8080";
+var URL_TRANSACTION_LIST = "/rest/transactions";
 
 findAll();
 
@@ -6,7 +8,7 @@ function findAll() {
     console.log('findAll');
     $.ajax({
         type: 'GET',
-        url: URL_TRANSACTION_LIST,
+        url: PROTOCOL+HOST+URL_TRANSACTION_LIST,
         dataType: "json",
         success: renderList,
         error: function(jqXHR, textStatus, errorThrown) {
