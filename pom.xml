@@ -18,12 +18,14 @@
         <module>app-service</module>
         <module>app-test</module>
         <module>app-rest</module>
+        <module>app-web</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <log4j2.version>2.1</log4j2.version>
         <spring.version>4.2.1.RELEASE</spring.version>
+        <spring.security>4.0.3.RELEASE</spring.security>
         <hsqldb.version>2.3.3</hsqldb.version>
         <easymock.version>3.2</easymock.version>
         <jackson.databind-version>2.4.3</jackson.databind-version>
@@ -68,11 +70,6 @@
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>com.epam.brest.course2015</groupId>
-                <artifactId>app-termclient</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
                 <version>${spring.version}</version>
@@ -102,6 +99,26 @@
                 <artifactId>spring-test</artifactId>
                 <version>${spring.version}</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-web</artifactId>
+                <version>4.0.3.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-core</artifactId>
+                <version>4.0.3.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-config</artifactId>
+                <version>4.0.3.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-taglibs</artifactId>
+                <version>4.0.3.RELEASE</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>

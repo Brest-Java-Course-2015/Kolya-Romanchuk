@@ -59,26 +59,35 @@
     </dependencies>
 
     <build>
+        <finalName>bank-account-server</finalName>
         <plugins>
             <plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>8.1.16.v20140903</version>
+                <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <stopPort>9091</stopPort>
-                    <stopKey>STOP</stopKey>
-                    <webAppConfig>
-                        <contextPath>/rest</contextPath>
-                        <allowDuplicateFragmentNames>true</allowDuplicateFragmentNames>
-                    </webAppConfig>
-                    <scanIntervalSeconds>10</scanIntervalSeconds>
-                    <connectors>
-                        <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-                            <port>8080</port>
-                        </connector>
-                    </connectors>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
+
             </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.mortbay.jetty</groupId>-->
+                <!--<artifactId>jetty-maven-plugin</artifactId>-->
+                <!--<version>8.1.16.v20140903</version>-->
+                <!--<configuration>-->
+                    <!--<stopPort>9091</stopPort>-->
+                    <!--<stopKey>STOP</stopKey>-->
+                    <!--<webAppConfig>-->
+                        <!--<contextPath>/rest</contextPath>-->
+                        <!--<allowDuplicateFragmentNames>true</allowDuplicateFragmentNames>-->
+                    <!--</webAppConfig>-->
+                    <!--<scanIntervalSeconds>10</scanIntervalSeconds>-->
+                    <!--<connectors>-->
+                        <!--<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">-->
+                            <!--<port>8080</port>-->
+                        <!--</connector>-->
+                    <!--</connectors>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 
