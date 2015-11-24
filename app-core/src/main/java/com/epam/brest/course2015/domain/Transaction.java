@@ -1,5 +1,7 @@
 package com.epam.brest.course2015.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 /**
@@ -14,6 +16,7 @@ public class Transaction {
 
     private Integer checknumberrecipient;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date date;
 
     private Integer summa;

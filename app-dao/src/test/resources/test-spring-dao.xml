@@ -19,6 +19,7 @@
         <constructor-arg ref="dataSource"/>
     </bean>
 
+
     <bean id="checkDao" class="com.epam.brest.course2015.dao.CheckDaoImpl">
         <constructor-arg ref="dataSource"/>
     </bean>

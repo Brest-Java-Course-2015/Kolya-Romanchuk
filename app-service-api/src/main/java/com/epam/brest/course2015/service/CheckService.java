@@ -9,10 +9,10 @@ import java.util.List;
  */
 public interface CheckService {
 
-    public List<Check> getAllChecks();
+    public List<Check> getAllChecks(Integer id_user);
     public Integer addCheck(Check check);
     public void deleteCheck(Integer id_check);
-    public void updateCheck(Check check);
+//    public void updateCheck(Check check);
     public Check getCheckById(Integer id_check);
     public Check getCheckByCheckNumder(Integer cheknumber);
     public void logCheck(Check check);

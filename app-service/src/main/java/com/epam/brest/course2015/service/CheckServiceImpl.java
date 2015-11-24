@@ -23,13 +23,13 @@ public class CheckServiceImpl implements CheckService {
         this.checkDao = checkDao;
     }
 
-    @Override
-    public List<Check> getAllChecks() {
+
+    public List<Check> getAllChecks(Integer id_user) {
+        Assert.notNull(id_user,"Id User should not be null");
         LOGGER.debug("getAllChecks()");
-        return checkDao.getAllChecks();
+        return checkDao.getAllChecks(id_user);
     }
 
-    @Override
     public Integer addCheck(Check check) {
         Assert.notNull(check, "Check should not be null");
         LOGGER.debug("addCheck(): checkNumber = {} ",check.getChecknumber());
@@ -40,7 +40,6 @@ public class CheckServiceImpl implements CheckService {
         return checkDao.addCheck(check);
     }
 
-    @Override
     public void deleteCheck(Integer id_check) {
         LOGGER.debug("deleteCheck(): id_check = {} ",id_check);
         Assert.notNull(id_check, "Id Check should not be null");
@@ -48,15 +47,13 @@ public class CheckServiceImpl implements CheckService {
         checkDao.deleteCheck(id_check);
     }
 
-    @Override
-    public void updateCheck(Check check) {
-        Assert.notNull(check, "Check should not be null");
-        LOGGER.debug("updateCheck(): checkNumber = {} ",check.getChecknumber());
-        Assert.notNull(check.getSumma(), "Summa Check should not be null");
-        checkDao.updateCheck(check);
-    }
+//    public void updateCheck(Check check) {
+//        Assert.notNull(check, "Check should not be null");
+//        LOGGER.debug("updateCheck(): checkNumber = {} ",check.getChecknumber());
+//        Assert.notNull(check.getSumma(), "Summa Check should not be null");
+//        checkDao.updateCheck(check);
+//    }
 
-    @Override
     public Check getCheckById(Integer id_check) {
         LOGGER.debug("getCheckById(): id_check = {} ", id_check);
         Assert.notNull(id_check, "Id Check should not be null");
@@ -64,14 +61,13 @@ public class CheckServiceImpl implements CheckService {
         return checkDao.getCheckById(id_check);
     }
 
-    @Override
     public Check getCheckByCheckNumder(Integer cheknumber) {
         LOGGER.debug("getCheckByCheckNumder(): checkNumber = {} ", cheknumber);
         Assert.notNull(cheknumber, "Check Number should not be null");
         return checkDao.getCheckByCheckNumder(cheknumber);
     }
 
-    @Override
+
     public void logCheck(Check check) {
         LOGGER.debug("logCheck(): id_check = {}", check.getId_check());
     }

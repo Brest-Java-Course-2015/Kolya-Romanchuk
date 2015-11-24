@@ -10,6 +10,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 /**
@@ -32,15 +34,17 @@ public class CheckServiceImplTest {
     @Test
     public void testGetAllChecks() throws Exception {
         LOGGER.debug("test: getAllChecks()");
-        checkService.getAllChecks();
+        Integer id_user = 1;
+        List<Check> checks = checkService.getAllChecks(id_user);
+        assertTrue(checks.size() == 2);
     }
 
     @Test
     public void testAddCheck() throws Exception {
         LOGGER.debug("test: addCheck()");
-        Integer countCheck = checkService.getAllChecks().size();
+        Integer countCheck = checkService.getAllChecks(check.getId_user()).size();
         checkService.addCheck(check);
-        assertTrue(countCheck + 1 == checkService.getAllChecks().size());
+        assertTrue(countCheck + 1 == checkService.getAllChecks(check.getId_user()).size());
     }
 
 
@@ -76,22 +80,6 @@ public class CheckServiceImplTest {
 
 
 
-    @Test
-    public void testUpdateCheck() throws Exception {
-        LOGGER.debug("test: updateCheck()");
-        Check check = checkService.getCheckByCheckNumder(CHEKNUMBER);
-        check.setSumma(2012);
-        checkService.updateCheck(check);
-        assertEquals(check.getSumma(), checkService.getCheckByCheckNumder(CHEKNUMBER).getSumma());
-    }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testUpdateCheckNullCheckNumber() throws Exception{
-        LOGGER.debug("test: updateCheckNullCheckNumber()");
-        Check check = checkService.getCheckByCheckNumder(CHEKNUMBER);
-        check.setSumma(null);
-        checkService.updateCheck(check);
-        assertEquals(check.getSumma(), checkService.getCheckByCheckNumder(CHEKNUMBER).getSumma());
-    }
 
 }

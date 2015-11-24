@@ -1,5 +1,6 @@
 package com.epam.brest.course2015.service;
 
+import com.epam.brest.course2015.dao.CheckDao;
 import com.epam.brest.course2015.dao.TransactionDao;
 import com.epam.brest.course2015.domain.Transaction;
 import org.apache.logging.log4j.LogManager;
@@ -23,13 +24,11 @@ public class TransactionServiceImpl implements TransactionService {
         this.transactionDao = transactionDao;
     }
 
-    @Override
     public List<Transaction> getAllTransactions() {
         LOGGER.debug("getAllTransaction()");
         return transactionDao.getAllTransactions();
     }
 
-    @Override
     public Integer addTransaction(Transaction transaction) {
         Assert.notNull(transaction, "Transaction should not be null");
         LOGGER.debug("addTransaction(): numberchecksender = {} ", transaction.getChecknumbersender());
@@ -40,7 +39,6 @@ public class TransactionServiceImpl implements TransactionService {
         return transactionDao.addTransaction(transaction);
     }
 
-    @Override
     public void deleteTransaction(Integer id_transaction) {
         LOGGER.debug("deleteTransaction(): id_transaction = {} ", id_transaction);
         Assert.notNull(id_transaction, "Id Transaction should not be null");
@@ -48,7 +46,6 @@ public class TransactionServiceImpl implements TransactionService {
         transactionDao.deleteTransaction(id_transaction);
     }
 
-    @Override
     public Transaction getTransactionById(Integer id_transaction) {
         LOGGER.debug("gettransactionById: id_transaction = {} ",id_transaction);
         Assert.notNull(id_transaction, "Id Transaction should not be null");
@@ -56,7 +53,6 @@ public class TransactionServiceImpl implements TransactionService {
         return transactionDao.getTransactionById(id_transaction);
     }
 
-    @Override
     public void logTransaction(Transaction transaction) {
         LOGGER.debug("logTransaction:  id_transaction = {} ", transaction.getId_transaction());
     }

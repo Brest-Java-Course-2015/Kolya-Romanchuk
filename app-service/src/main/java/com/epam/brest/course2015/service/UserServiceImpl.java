@@ -24,13 +24,11 @@ public class UserServiceImpl implements UserService {
         this.userDao = userDao;
     }
 
-    @Override
     public List<User> getAllUsers() {
         LOGGER.debug("getAllUsers()");
         return userDao.getAllUsers();
     }
 
-    @Override
     public void deleteUser(Integer id_user) {
         LOGGER.debug("deleteUser(): id_user = {} ", id_user);
         Assert.notNull(id_user,"Id user should not be null.");
@@ -38,7 +36,6 @@ public class UserServiceImpl implements UserService {
         userDao.deleteUser(id_user);
     }
 
-    @Override
     public User getUserById(Integer id_user) {
         LOGGER.debug("getUserById(): id_user = {} ", id_user);
         Assert.notNull(id_user, "Id user should not be null");
@@ -46,19 +43,16 @@ public class UserServiceImpl implements UserService {
         return userDao.getUserById(id_user);
     }
 
-    @Override
     public User getUserByLogin(String login) {
         LOGGER.debug("getUserByLogin(): login = {}", login);
         Assert.hasText(login, "User login should not be null.");
         return userDao.getUserByLogin(login);
     }
 
-    @Override
     public void logUser(User user) {
         LOGGER.debug("logUser() : id_user = {} ", user.getId_user());
     }
 
-    @Override
     public Integer logingUser(String login, Integer password) {
         User user = getUserByLogin(login);
         if (user != null) {
@@ -71,7 +65,7 @@ public class UserServiceImpl implements UserService {
             return null;
         }
     }
-    @Override
+
     public Integer addUser(User user) {
         Assert.notNull(user, "User should not be null.");
         LOGGER.debug("addUser(): user login = {} ",user.getLogin());

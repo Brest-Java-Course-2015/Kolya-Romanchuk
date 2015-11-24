@@ -22,11 +22,11 @@ public class CheckRestController {
     @Autowired
     private CheckService checkService;
 
-    @RequestMapping(value = "/checks", method = RequestMethod.GET)
+    @RequestMapping(value = "/checks/{id_user}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
-    public @ResponseBody List<Check> getAllCheck(){
+    public @ResponseBody List<Check> getAllCheck(@PathVariable(value = "id_user")Integer id_user){
         LOGGER.debug("getAllCheck()");
-        return checkService.getAllChecks();
+        return checkService.getAllChecks(id_user);
     }
 
     @RequestMapping(value = "/check", method = RequestMethod.POST)

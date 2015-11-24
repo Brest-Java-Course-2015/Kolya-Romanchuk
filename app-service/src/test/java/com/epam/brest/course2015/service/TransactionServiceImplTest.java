@@ -33,14 +33,14 @@ public class TransactionServiceImplTest {
         LOGGER.debug("test: getAllTransaction()");
         assertTrue(transactionService.getAllTransactions().size() > 0);
     }
-
-    @Test
-    public void testAddTransaction() throws Exception {
-        LOGGER.debug("test: addTransaction()");
-        Integer countTransactions = transactionService.getAllTransactions().size();
-        transactionService.addTransaction(transaction);
-        assertTrue(countTransactions + 1 == transactionService.getAllTransactions().size());
-    }
+//
+//    @Test
+//    public void testAddTransaction() throws Exception {
+//        LOGGER.debug("test: addTransaction()");
+//        Integer countTransactions = transactionService.getAllTransactions().size();
+//        transactionService.addTransaction(transaction);
+//        assertTrue(countTransactions + 1 == transactionService.getAllTransactions().size());
+//    }
 
     @Test(expected = IllegalArgumentException.class)
     public void testAddNullTransaction() throws Exception{

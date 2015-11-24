@@ -6,15 +6,12 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
 import javax.sql.DataSource;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import static com.epam.brest.course2015.domain.Check.CheckField.*;
@@ -52,9 +49,9 @@ public class CheckDaoImpl implements CheckDao {
         namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
     }
 
-    public List<Check> getAllChecks() {
+    public List<Check> getAllChecks(Integer id_user) {
         LOGGER.debug("getAllChecks");
-        return jdbcTemplate.query(checkSelect,new BeanPropertyRowMapper<Check>(Check.class));
+        return jdbcTemplate.query(checkSelect, new Object[]{id_user},new BeanPropertyRowMapper<Check>(Check.class));
     }
 
     public Integer addCheck(Check check) {
@@ -67,11 +64,6 @@ public class CheckDaoImpl implements CheckDao {
     public void deleteCheck(Integer id_check) {
         LOGGER.debug("deleteCheck");
         jdbcTemplate.update(checkDelete, new Object[]{id_check});
-    }
-
-    public void updateCheck(Check check) {
-        LOGGER.debug("updateCheck");
-        jdbcTemplate.update(checkUpdate, new Object[]{check.getSumma()});
     }
 
     public Check getCheckById(Integer id_check) {

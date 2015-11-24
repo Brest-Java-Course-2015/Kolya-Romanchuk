@@ -35,7 +35,8 @@ public class CheckDaoImplTest {
     @Test
     public void testGetAllChecks() throws Exception {
         LOGGER.debug("test: getAllChecks");
-        List<Check> checks = checkDao.getAllChecks();
+        Integer id_user = 1;
+        List<Check> checks = checkDao.getAllChecks(id_user);
         assertTrue(checks.size() == 2);
     }
 
@@ -49,25 +50,4 @@ public class CheckDaoImplTest {
         assertEquals(check.getSumma(), newCheck.getSumma());
 
     }
-
-    @Test
-    public void testDeleteCheck() throws Exception {
-        LOGGER.debug("test: deleteCheck");
-        List<Check> checks = checkDao.getAllChecks();
-        Integer checkSize = checks.size();
-        assertTrue(checks.size() > 0);
-        checkDao.deleteCheck(checks.get(0).getId_check());
-        assertTrue(checkSize - 1 == checkDao.getAllChecks().size());
-    }
-
-    @Test
-    public void testUpdateCheck() throws Exception {
-        LOGGER.debug("test: updateCheck");
-        Check check = checkDao.getCheckByCheckNumder(CHECKNUMBER);
-        check.setSumma(SUMMA + 1564);
-        checkDao.updateCheck(check);
-        Check newCheck = checkDao.getCheckByCheckNumder(CHECKNUMBER);
-        assertEquals(check.getSumma(),newCheck.getSumma());
-    }
-
 }

@@ -1,5 +1,6 @@
 package com.epam.brest.course2015.dao;
 
+import com.epam.brest.course2015.domain.Check;
 import com.epam.brest.course2015.domain.Transaction;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,9 +13,11 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
 import javax.sql.DataSource;
+import java.util.Date;
 import java.util.List;
 
 import static com.epam.brest.course2015.domain.Transaction.TransactionFields.*;
+//import static com.epam.brest.course2015.domain.Check.CheckField.*;
 /**
  * Created by user on 06.11.15.
  */
@@ -24,6 +27,16 @@ public class TransactionDaoImpl implements TransactionDao {
 
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+    @Value("${check.update}")
+    private String checkUpdate;
+
+    @Value("${check.selectbynumber}")
+    private String checkSelectByNumber;
+
+
+    @Value("${transaction.filter}")
+    private String tranasctionFilter;
 
     @Value("${transaction.insert}")
     private String transactionInsert;
@@ -49,8 +62,16 @@ public class TransactionDaoImpl implements TransactionDao {
 
     public Integer addTransaction(Transaction transaction) {
         LOGGER.debug("addTransaction");
+        Check checksender = jdbcTemplate.queryForObject(checkSelectByNumber, new Object[]{transaction.getChecknumbersender()},
+                new BeanPropertyRowMapper<Check>(Check.class));
+        Check checkrecepient = jdbcTemplate.queryForObject(checkSelectByNumber, new Object[]{transaction.getChecknumberrecipient()},
+                new BeanPropertyRowMapper<Check>(Check.class));
+        checksender.setSumma(checksender.getSumma()-transaction.getSumma());
+        checkrecepient.setSumma(checkrecepient.getSumma()+transaction.getSumma());
+        jdbcTemplate.update(checkUpdate, new Object[]{checksender.getSumma(), checksender.getId_check()});
+        jdbcTemplate.update(checkUpdate, new Object[]{checkrecepient.getSumma(), checkrecepient.getId_check()});
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        namedParameterJdbcTemplate.update(transactionInsert,getParametersMap(transaction),keyHolder);
+        namedParameterJdbcTemplate.update(transactionInsert,getParametersMapTransaction(transaction),keyHolder);
         return keyHolder.getKey().intValue();
     }
 
@@ -65,7 +86,16 @@ public class TransactionDaoImpl implements TransactionDao {
                 new BeanPropertyRowMapper<Transaction>(Transaction.class));
     }
 
-    private MapSqlParameterSource getParametersMap(Transaction transaction) {
+    public List<Transaction> getFiltertransactions(Date date_from, Date date_before) {
+        return null;
+    }
+//
+//    public List<Transaction> getFiltertransactions(Date date_from, Date date_before) {
+//        LOGGER.debug("getFilterTransactions");
+//        return jdbcTemplate.query(tranasctionFilter,new BeanPropertyRowMapper<Transaction>(Transaction.class));
+//    }
+
+    private MapSqlParameterSource getParametersMapTransaction(Transaction transaction) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue(ID_TRANSACTION.getValue(), transaction.getId_transaction());
         parameterSource.addValue(CHECKNUMBERSENDER.getValue(), transaction.getChecknumbersender());

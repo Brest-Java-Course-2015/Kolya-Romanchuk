@@ -10,6 +10,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -27,7 +32,7 @@ public class TransactionDaoImplTest {
     @Autowired
     private TransactionDao transactionDao;
 
-    private static Transaction tran= new Transaction(null,1234567,13456487,20054, null, 2);
+    private static Transaction tran= new Transaction(null,1234,121234,1, null, 1);
 
     @Test
     public void testGetAllTransactions() throws Exception {
@@ -57,5 +62,17 @@ public class TransactionDaoImplTest {
         transactionDao.deleteTransaction(transactions.get(0).getId_transaction());
         assertTrue((sizeBefore - 1) == transactionDao.getAllTransactions().size());
     }
+
+//    @Test
+//    public void testGetFiltertransactions() throws Exception{
+//        LOGGER.debug("test: getFilterTransactions");
+//        DateFormat format = new SimpleDateFormat("dd-mm-yyyy");
+//        String datefrom = "10-10-2015";
+//        String datebefore = "25-11-2015";
+//        Date dateFrom = format.parse(datefrom);
+//        Date dateBefore = format.parse(datebefore);
+//        List<Transaction> transactions = transactionDao.getFiltertransactions(dateFrom,dateBefore);
+//        assertTrue(transactions.size() == 2);
+//    }
 
 }

@@ -59,11 +59,11 @@ public class CheckControllerMockTest {
 
     @Test
     public void testGetAllChecks() throws Exception{
-        expect(checkService.getAllChecks()).andReturn(Arrays.<Check>asList(new Check(1,12413,45353,1)));
+        expect(checkService.getAllChecks(anyObject(Integer.class))).andReturn(Arrays.<Check>asList(new Check(1,12413,45353,1)));
         replay(checkService);
         LOGGER.debug("test: getAllChecks()");
 
-        mockMvc.perform(get("/checks").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/checks/1").accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
