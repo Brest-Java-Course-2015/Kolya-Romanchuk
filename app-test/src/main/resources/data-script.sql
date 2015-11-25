@@ -1,5 +1,5 @@
-INSERT INTO transaction (id_transaction, checknumbersender, checknumberrecipient, summa, date ,id_check) VALUES (1,2345,2347,2000, TO_TIMESTAMP('21-10-2015', 'DD-MM-YYYY'),2);
-INSERT INTO transaction (id_transaction, checknumbersender, checknumberrecipient, summa, date ,id_check) VALUES (2,2346,2349,4542, TO_TIMESTAMP('24-11-2015', 'DD-MM-YYYY'),2);
+INSERT INTO transaction (id_transaction, checknumbersender, checknumberrecipient, summa, date ,id_check) VALUES (1,2345,2347,2000, TO_DATE('2015-10-21', 'YYYY-MM-DD'),2);
+INSERT INTO transaction (id_transaction, checknumbersender, checknumberrecipient, summa, date ,id_check) VALUES (2,2346,2349,4542, TO_DATE('2015-11-24', 'YYYY-MM-DD'),2);
 
 INSERT INTO check (id_check, checknumber, summa, id_user) VALUES (1, 1234, 89787, 1);
 INSERT INTO check (id_check, checknumber, summa, id_user) VALUES (2, 121234, 321331, 1);

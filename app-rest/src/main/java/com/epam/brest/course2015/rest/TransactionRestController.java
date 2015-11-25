@@ -8,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,11 +25,11 @@ public class TransactionRestController {
     @Autowired
     private TransactionService transactionService;
 
-    @RequestMapping(value = "/transactions", method = RequestMethod.GET)
+    @RequestMapping(value = "/transactions/{id_user}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
-    public @ResponseBody List<Transaction> getAllTransaction(){
+    public @ResponseBody List<Transaction> getAllTransaction(@PathVariable(value = "id_user") Integer id_user){
         LOGGER.debug("getAllTransactions()");
-        return transactionService.getAllTransactions();
+        return transactionService.getAllTransactions(id_user);
     }
 
     @RequestMapping(value = "/transaction", method = RequestMethod.POST)
@@ -40,5 +44,15 @@ public class TransactionRestController {
     public @ResponseBody Transaction getTransactionById(@PathVariable(value = "id") Integer id){
         LOGGER.debug("getTransactionById(): id = {} ",id);
         return transactionService.getTransactionById(id);
+    }
+
+    @RequestMapping(value = "/transactions/filter/date/{datefrom}/{datebefore}", method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public @ResponseBody List<Transaction> getFilterTransaction(@PathVariable(value = "datefrom") String date_from, @PathVariable(value = "datebefore") String date_before) throws ParseException {
+        LOGGER.debug("getFilterTransaction()");
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateFrom= format.parse(date_from);
+        Date dateBefore= format.parse(date_before);
+        return transactionService.getFiltertransactions(dateFrom,dateBefore);
     }
 }

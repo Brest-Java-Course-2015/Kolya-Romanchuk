@@ -32,12 +32,14 @@ public class TransactionDaoImplTest {
     @Autowired
     private TransactionDao transactionDao;
 
+    private Integer id_user =1;
+
     private static Transaction tran= new Transaction(null,1234,121234,1, null, 1);
 
     @Test
     public void testGetAllTransactions() throws Exception {
         LOGGER.debug("test: getAllTransactions");
-        List<Transaction> transactions = transactionDao.getAllTransactions();
+        List<Transaction> transactions = transactionDao.getAllTransactions(id_user);
         assertTrue(transactions.size() == 2);
     }
 
@@ -48,7 +50,7 @@ public class TransactionDaoImplTest {
         assertNotNull(id_transaction);
         Transaction newTransaction = transactionDao.getTransactionById(id_transaction);
         assertEquals(newTransaction.getId_transaction(),id_transaction);
-        List<Transaction> transactions = transactionDao.getAllTransactions();
+        List<Transaction> transactions = transactionDao.getAllTransactions(id_user);
         assertTrue(transactions.size() == 3);
 
     }
@@ -56,23 +58,25 @@ public class TransactionDaoImplTest {
     @Test
     public void testDeleteTransaction() throws Exception {
         LOGGER.debug("test: deleteTransaction");
-        List<Transaction> transactions = transactionDao.getAllTransactions();
+        List<Transaction> transactions = transactionDao.getAllTransactions(id_user);
         assertTrue(transactions.size() > 0);
         int sizeBefore = transactions.size();
         transactionDao.deleteTransaction(transactions.get(0).getId_transaction());
-        assertTrue((sizeBefore - 1) == transactionDao.getAllTransactions().size());
+        assertTrue((sizeBefore - 1) == transactionDao.getAllTransactions(id_user).size());
     }
 
-//    @Test
-//    public void testGetFiltertransactions() throws Exception{
-//        LOGGER.debug("test: getFilterTransactions");
-//        DateFormat format = new SimpleDateFormat("dd-mm-yyyy");
-//        String datefrom = "10-10-2015";
-//        String datebefore = "25-11-2015";
-//        Date dateFrom = format.parse(datefrom);
-//        Date dateBefore = format.parse(datebefore);
-//        List<Transaction> transactions = transactionDao.getFiltertransactions(dateFrom,dateBefore);
-//        assertTrue(transactions.size() == 2);
-//    }
+    @Test
+    public void testGetFiltertransactions() throws Exception{
+        LOGGER.debug("test: getFilterTransactions");
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String datefrom = "2015-10-21";
+        String datebefore = "2015-10-21";
+        Date dateFrom = format.parse(datefrom);
+        Date dateBefore = format.parse(datebefore);
+        LOGGER.debug(">> dateFrom = {} ", dateFrom);
+        LOGGER.debug(">> dateBefore = {} ", dateBefore);
+        List<Transaction> transactions = transactionDao.getFiltertransactions(dateFrom,dateBefore);
+        assertTrue(transactions.size() == 1);
+    }
 
 }

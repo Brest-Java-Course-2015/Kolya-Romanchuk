@@ -11,7 +11,7 @@ CREATE TABLE transaction
 	checknumbersender INT NOT NULL,
 	checknumberrecipient INT NOT NULL,
 	summa INT,
-	date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	date DATE DEFAULT CURRENT_DATE NOT NULL,
 	id_check INT NOT NULL
 );
 

@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface TransactionDao {
 
-    public List<Transaction> getAllTransactions();
+    public List<Transaction> getAllTransactions(Integer id_user);
     public Integer addTransaction(Transaction transaction);
     public void deleteTransaction(Integer id_transaction);
     public Transaction getTransactionById(Integer id_transaction);

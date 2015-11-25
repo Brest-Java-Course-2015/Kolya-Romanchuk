@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,9 +25,9 @@ public class TransactionServiceImpl implements TransactionService {
         this.transactionDao = transactionDao;
     }
 
-    public List<Transaction> getAllTransactions() {
+    public List<Transaction> getAllTransactions(Integer id_user) {
         LOGGER.debug("getAllTransaction()");
-        return transactionDao.getAllTransactions();
+        return transactionDao.getAllTransactions(id_user);
     }
 
     public Integer addTransaction(Transaction transaction) {
@@ -55,5 +56,11 @@ public class TransactionServiceImpl implements TransactionService {
 
     public void logTransaction(Transaction transaction) {
         LOGGER.debug("logTransaction:  id_transaction = {} ", transaction.getId_transaction());
+    }
+
+    public List<Transaction> getFiltertransactions(Date date_from, Date date_before) {
+        LOGGER.debug("getFiltertransaction");
+        Assert.isTrue(date_from.getTime() <= date_before.getTime(),"From Date < = Before Date");
+        return transactionDao.getFiltertransactions(date_from, date_before);
     }
 }

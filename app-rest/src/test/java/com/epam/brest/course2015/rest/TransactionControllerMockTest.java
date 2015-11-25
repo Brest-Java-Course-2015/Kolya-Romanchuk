@@ -60,12 +60,12 @@ public class TransactionControllerMockTest {
 
     @Test
     public void testGetAllTransactions() throws Exception{
-        expect(transactionService.getAllTransactions())
-                .andReturn(Arrays.<Transaction>asList(new Transaction(1, 12345, 4564564, 1213213, null,2)));
+        expect(transactionService.getAllTransactions(anyObject(Integer.class)))
+                .andReturn(Arrays.<Transaction>asList(new Transaction(1, 12345, 4564564, 1213213, null, 1)));
         replay(transactionService);
         LOGGER.debug("test: getAllTransactions()");
 
-        mockMvc.perform(get("/transactions").accept(MediaType.APPLICATION_JSON)).andDo(print())
+        mockMvc.perform(get("/transactions/1").accept(MediaType.APPLICATION_JSON)).andDo(print())
                 .andExpect(status().isOk());
     }
 

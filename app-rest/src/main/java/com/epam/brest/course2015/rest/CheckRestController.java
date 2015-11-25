@@ -57,11 +57,11 @@ public class CheckRestController {
         checkService.deleteCheck(id);
     }
 
-    @RequestMapping(value = "/check/update",method = RequestMethod.PUT)
-    @ResponseStatus(value = HttpStatus.ACCEPTED)
-    public @ResponseBody void updateCheck(@RequestBody Check check){
-        LOGGER.debug("updateCheck(): check_id = {} ",check.getId_check());
-        checkService.updateCheck(check);
-    }
+//    @RequestMapping(value = "/check/update",method = RequestMethod.PUT)
+//    @ResponseStatus(value = HttpStatus.ACCEPTED)
+//    public @ResponseBody void updateCheck(@RequestBody Check check){
+//        LOGGER.debug("updateCheck(): check_id = {} ",check.getId_check());
+//        checkService.updateCheck(check);
+//    }
 
 }

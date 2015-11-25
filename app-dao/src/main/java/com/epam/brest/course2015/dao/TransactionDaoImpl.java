@@ -55,9 +55,9 @@ public class TransactionDaoImpl implements TransactionDao {
         namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
     }
 
-    public List<Transaction> getAllTransactions() {
+    public List<Transaction> getAllTransactions(Integer id_user) {
         LOGGER.debug("getAllTransactions");
-        return jdbcTemplate.query(transactionSelect,new BeanPropertyRowMapper<Transaction>(Transaction.class));
+        return jdbcTemplate.query(transactionSelect,new Object[]{id_user},new BeanPropertyRowMapper<Transaction>(Transaction.class));
     }
 
     public Integer addTransaction(Transaction transaction) {
@@ -86,14 +86,14 @@ public class TransactionDaoImpl implements TransactionDao {
                 new BeanPropertyRowMapper<Transaction>(Transaction.class));
     }
 
-    public List<Transaction> getFiltertransactions(Date date_from, Date date_before) {
-        return null;
-    }
-//
 //    public List<Transaction> getFiltertransactions(Date date_from, Date date_before) {
-//        LOGGER.debug("getFilterTransactions");
-//        return jdbcTemplate.query(tranasctionFilter,new BeanPropertyRowMapper<Transaction>(Transaction.class));
+//        return null;
 //    }
+
+    public List<Transaction> getFiltertransactions(Date date_from, Date date_before) {
+        LOGGER.debug("getFilterTransactions");
+        return jdbcTemplate.query(tranasctionFilter, new Object[]{date_from, date_before},new BeanPropertyRowMapper<Transaction>(Transaction.class));
+    }
 
     private MapSqlParameterSource getParametersMapTransaction(Transaction transaction) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();

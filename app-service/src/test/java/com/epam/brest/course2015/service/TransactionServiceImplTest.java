@@ -10,6 +10,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import static org.junit.Assert.*;
 
 /**
@@ -23,7 +27,9 @@ public class TransactionServiceImplTest {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    private final Transaction transaction = new Transaction(null, 123456, 546546, 20000, null, 3);
+    private final Transaction transaction = new Transaction(null, 1234, 121234, 20000, null, 1);
+
+    private final Integer id_user = 1;
 
     @Autowired
     private TransactionService transactionService;
@@ -31,16 +37,16 @@ public class TransactionServiceImplTest {
     @Test
     public void testGetAllTransactions() throws Exception {
         LOGGER.debug("test: getAllTransaction()");
-        assertTrue(transactionService.getAllTransactions().size() > 0);
+        assertTrue(transactionService.getAllTransactions(id_user).size() > 0);
     }
 //
-//    @Test
-//    public void testAddTransaction() throws Exception {
-//        LOGGER.debug("test: addTransaction()");
-//        Integer countTransactions = transactionService.getAllTransactions().size();
-//        transactionService.addTransaction(transaction);
-//        assertTrue(countTransactions + 1 == transactionService.getAllTransactions().size());
-//    }
+    @Test
+    public void testAddTransaction() throws Exception {
+        LOGGER.debug("test: addTransaction()");
+        Integer countTransactions = transactionService.getAllTransactions(id_user).size();
+        transactionService.addTransaction(transaction);
+        assertTrue(countTransactions + 1 == transactionService.getAllTransactions(id_user).size());
+    }
 
     @Test(expected = IllegalArgumentException.class)
     public void testAddNullTransaction() throws Exception{
@@ -81,6 +87,17 @@ public class TransactionServiceImplTest {
         transaction.setChecknumberrecipient(456789);
         transaction.setChecknumbersender(21564);
         transactionService.addTransaction(transaction);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetFilterTransaction() throws Exception{
+        LOGGER.debug("test: getFilterTransaction()");
+        String date_before = "2015-10-20";
+        String date_from = "2015-11-30";
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateFrom= format.parse(date_from);
+        Date dateBefore= format.parse(date_before);
+        transactionService.getFiltertransactions(dateFrom,dateBefore);
     }
 
 }
