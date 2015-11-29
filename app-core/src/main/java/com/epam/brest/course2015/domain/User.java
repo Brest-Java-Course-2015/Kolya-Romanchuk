@@ -16,6 +16,8 @@ public class User {
 
     private String lastname;
 
+    private String role;
+
     public User(){
     }
 
@@ -25,6 +27,15 @@ public class User {
         this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
+    }
+
+    public User(Integer id_user, String login, String password, String firstname, String lastname, String role){
+        this.id_user = id_user;
+        this.login = login;
+        this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.role = role;
     }
 
     public String getLastname() {
@@ -67,10 +78,19 @@ public class User {
         this.id_user = id_user;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public static enum UserFields{
         ID_USER ("id_user"),
         LOGIN ("login"),
         PASSWORD ("password"),
+        ROLE("role"),
         FIRSTNAME ("firstname"),
         LASTNAME ("lastname");
 
@@ -83,6 +103,16 @@ public class User {
         public String getValue(){
             return this.value;
         }
+    }
+
+    @Override
+    public String toString(){
+        return String.format("User: {" +
+                "id_user=" + id_user +
+                ", login=" + login +
+                ", lastname=" + lastname +
+                ", firstname=" + firstname +
+                '}');
     }
 
 }

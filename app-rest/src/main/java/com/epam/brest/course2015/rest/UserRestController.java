@@ -14,12 +14,15 @@ import java.util.List;
  * Created by user on 10.11.15.
  */
 @RestController
-public class UserRestController {
+public class UserRestController{
 
     private static final Logger LOGGER = LogManager.getLogger();
 
     @Autowired
     private UserService userService;
+
+//    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+//    public @ResponseBody
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
@@ -55,11 +58,4 @@ public class UserRestController {
         LOGGER.debug("deleteUser(): id = {} ",Id);
         userService.deleteUser(Id);
     }
-
-    @RequestMapping(value = "/loging", method = RequestMethod.POST)
-    @ResponseStatus(value = HttpStatus.OK)
-    public @ResponseBody Integer loggingUser(@RequestBody String login, @RequestBody Integer password){
-        return userService.logingUser(login,password);
-    }
-
 }

@@ -16,6 +16,9 @@
             <groupId>com.epam.brest.course2015</groupId>
             <artifactId>app-core</artifactId>
         </dependency>
+
+
+
     </dependencies>
 
 

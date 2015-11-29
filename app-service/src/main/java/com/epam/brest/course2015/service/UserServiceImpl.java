@@ -53,18 +53,6 @@ public class UserServiceImpl implements UserService {
         LOGGER.debug("logUser() : id_user = {} ", user.getId_user());
     }
 
-    public Integer logingUser(String login, Integer password) {
-        User user = getUserByLogin(login);
-        if (user != null) {
-            if (password == password) {
-                return user.getId_user();
-            } else {
-                return null;
-            }
-        } else {
-            return null;
-        }
-    }
 
     public Integer addUser(User user) {
         Assert.notNull(user, "User should not be null.");
