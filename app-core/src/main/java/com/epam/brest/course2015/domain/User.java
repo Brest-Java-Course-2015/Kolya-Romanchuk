@@ -21,6 +21,13 @@ public class User {
     public User(){
     }
 
+    public User(String login, String password, String firstname, String lastname){
+        this.login = login;
+        this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+
     public User(Integer id_user, String login, String password, String firstname, String lastname){
         this.id_user = id_user;
         this.login = login;

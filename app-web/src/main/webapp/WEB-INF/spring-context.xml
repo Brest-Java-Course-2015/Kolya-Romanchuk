@@ -50,13 +50,13 @@
         <!--<property name="transactionDao" ref="transactionDao"/>-->
     <!--</bean>-->
 
-    <!--<bean id="checkDao" class="com.epam.brest.course2015.dao.CheckDaoImpl">-->
-        <!--<constructor-arg ref="dataSource"/>-->
-    <!--</bean>-->
+    <bean id="checkDao" class="com.epam.brest.course2015.dao.CheckDaoImpl">
+        <constructor-arg ref="dataSource"/>
+    </bean>
 
-    <!--<bean id="checkService" class="com.epam.brest.course2015.service.CheckServiceImpl">-->
-        <!--<property name="checkDao" ref="checkDao"/>-->
-    <!--</bean>-->
+    <bean id="checkService" class="com.epam.brest.course2015.service.CheckServiceImpl">
+        <property name="checkDao" ref="checkDao"/>
+    </bean>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/"/>

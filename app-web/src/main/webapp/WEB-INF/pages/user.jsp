@@ -26,6 +26,9 @@
         }
     </script>
     <c:if test="${pageContext.request.userPrincipal.name != null}">
+    <script> var login = "${pageContext.request.userPrincipal.name}"</script>
+
+
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -35,7 +38,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand">${pageContext.request.userPrincipal.name}</a>
+                <a id="idLogin" value="${pageContext.request.userPrincipal.name}" class="navbar-brand">${pageContext.request.userPrincipal.name}</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -44,6 +47,40 @@
             </div>
         </div>
     </nav>
+    <div class="container-fluid">
+    		<div class="row">
+    			<div class="col-sm-3 col-md-2 sidebar">
+    				<ul class="nav nav-sidebar">
+                        <li  class="active"><a href="${pageContext.request.contextPath}/user">Счета</a></li>
+                        <li><a href="${pageContext.request.contextPath}/user/${pageContext.request.userPrincipal.name}/transaction">Транзакции<span class="sr-only">(current)</span></a></li>
+                        <li><a>Выписка</a></li>
+                    </ul>
+    			</div>
+
+    			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    				<div class="table-responsive">
+    					<table class="table table-striped">
+    						<thead>
+    						<tr>
+    							<th>Номер счета</th>
+    							<th>Сумма</th>
+    						</tr>
+    						</thead>
+    						<tbody id="checkList">
+    								<tr>
+    									<td></td>
+    									<td></td>
+    								</tr>
+    						</tbody>
+    					</table>
+    				</div>
+    				<hr />
+    			</div>
+    		</div>
+    </div>
+
     </c:if>
+    <script src="<c:url value="/resources/js/jquery.js"/>"></script>
+    <script src="<c:url value="/resources/js/bootstrap.js"/>"></script>
 </body>
 </html>

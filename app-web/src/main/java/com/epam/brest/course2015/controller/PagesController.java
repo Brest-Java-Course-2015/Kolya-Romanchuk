@@ -4,9 +4,7 @@ import com.epam.brest.course2015.service.*;
 import com.epam.brest.course2015.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -19,9 +17,9 @@ public class PagesController {
 
     @Autowired
     private UserService userService;
-//
-//    @Autowired
-//    private CheckService checkService;
+
+    @Autowired
+    private CheckService checkService;
 //
 //    @Autowired
 //    private TransactionService transactionService;
@@ -48,10 +46,51 @@ public class PagesController {
         return modelAndView;
     }
 
+    @RequestMapping(value = {"/user/{login}/transaction"},method = RequestMethod.GET)
+    public ModelAndView transactionPage(@PathVariable(value = "login") String login){
+        List<Check> checks = checkService.getAllChecks(userService.getUserByLogin(login).getId_user());
+        ModelAndView modelAndView = new ModelAndView("transaction","checks",checks);
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ModelAndView adminPage(){
         List<User> users = userService.getAllUsers();
         ModelAndView modelAndView = new ModelAndView("admin","users",users);
         return modelAndView;
     }
+
+    @RequestMapping(value = "/admin/adduser",method = RequestMethod.GET)
+    public ModelAndView addUserPage(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("adduser");
+        return modelAndView;
+    }
+    @RequestMapping(value = "/admin/adduser/create", method = RequestMethod.POST)
+    public String addUser(@RequestBody User user){
+        userService.addUser(user);
+        return "redirect:/admin";
+
+    }
+
+    @RequestMapping(value = "/admin/{id_user}/addcheck", method = RequestMethod.GET)
+    public ModelAndView addCheckPage(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("addcheck");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/admin/{id_user}/addcheck/create", method = RequestMethod.POST)
+    public String addCheck(@RequestBody Check check,@PathVariable(value = "id_user") Integer id_user){
+        check.setId_user(id_user);
+        checkService.addCheck(check);
+        return "redirect:/admin";
+    }
+
+    @RequestMapping(value = "/admin/{id_user}/deleteuser",method = RequestMethod.DELETE)
+    public String deleteUser(@PathVariable(value = "id_user")Integer id_user){
+        userService.deleteUser(id_user);
+        return "redirect:/admin";
+    }
+
 }
