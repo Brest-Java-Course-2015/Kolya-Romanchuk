@@ -7,11 +7,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by user on 20.11.15.
  */
+@RestController
 @Controller
 public class PagesController {
 
@@ -39,11 +44,16 @@ public class PagesController {
         return modelAndView;
     }
 
-    @RequestMapping(value = {"/user","/"},method = RequestMethod.GET)
+    @RequestMapping(value = "/user",method = RequestMethod.GET)
     public ModelAndView userPage(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("user");
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/user/{login}",method = RequestMethod.GET)
+    public @ResponseBody List<Check> getCheck(@PathVariable(value = "login") String login){
+        return checkService.getAllChecks(userService.getUserByLogin(login).getId_user());
     }
 
     @RequestMapping(value = {"/user/{login}/transaction"},method = RequestMethod.GET)
@@ -53,12 +63,27 @@ public class PagesController {
         return modelAndView;
     }
 
+    @RequestMapping(value = {"/user/{login}/transaction/check/{checknumber}"},method = RequestMethod.GET)
+    public @ResponseBody Check getCheck(@PathVariable(value = "checknumber") Integer checknumber) {
+        return checkService.getCheckByCheckNumder(checknumber);
+    }
+
     @RequestMapping(value = {"/user/{login}/transaction/create"},method = RequestMethod.POST)
-    public String addTransaction(@RequestBody Transaction transaction){
+    public @ResponseBody Integer addTransaction(@RequestBody Transaction transaction){
         Integer id_check = checkService.getCheckByCheckNumder(transaction.getChecknumbersender()).getId_check();
         transaction.setId_check(id_check);
-        transactionService.addTransaction(transaction);
-        return "redirect:/user/{login}/transaction";
+        return transactionService.addTransaction(transaction);
+    }
+
+    @RequestMapping(value = "/user/{login}/extract/filter/{datefrom}/{datebefore}",method = RequestMethod.GET)
+    public @ResponseBody List<Transaction> getFilterTransaction(@PathVariable (value = "login") String login,
+                                                                @PathVariable(value = "datefrom") String date_from,
+                                                                @PathVariable(value = "datebefore") String date_before) throws ParseException {
+
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateFrom= format.parse(date_from);
+        Date dateBefore= format.parse(date_before);
+        return transactionService.getFiltertransactions(userService.getUserByLogin(login).getId_user(), dateFrom, dateBefore);
     }
 
     @RequestMapping(value = {"/user/{login}/extract"},method = RequestMethod.GET)

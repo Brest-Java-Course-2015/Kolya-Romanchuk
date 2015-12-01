@@ -1,5 +1,9 @@
 $('#btnAddUser').click(function(){
+
     addUser();
+    document.location="http://"+document.location.host+"/admin";
+//    document.location.replace("http://"+document.location.host+"/admin");
+
 });
 
 function addUser() {
@@ -11,10 +15,8 @@ function addUser() {
         dataType: "json",
         data: formToJSON(),
         success: function (data, textStatus, jqXHR) {
-            document.location.href="${pageContext.request.contextPath}/admin"
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            alert('addUser error: ' + textStatus);
         }
     });
 }

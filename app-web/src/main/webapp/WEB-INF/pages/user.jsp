@@ -26,8 +26,7 @@
         }
     </script>
     <c:if test="${pageContext.request.userPrincipal.name != null}">
-    <c:set var="login" value="${pageContext.request.userPrincipal.name}"/>
-
+    <script> var login = "${pageContext.request.userPrincipal.name}" </script>
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
@@ -38,7 +37,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a id="idLogin" value="${pageContext.request.userPrincipal.name}" class="navbar-brand" href="${pageContext.request.contextPath}/user">${pageContext.request.userPrincipal.name}</a>
+                <a class="navbar-brand" href="${pageContext.request.contextPath}/user">${pageContext.request.userPrincipal.name}</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -82,5 +81,6 @@
     </c:if>
     <script src="<c:url value="/resources/js/jquery.js"/>"></script>
     <script src="<c:url value="/resources/js/bootstrap.js"/>"></script>
+    <script src="<c:url value="/resources/js/user.js"/>"></script>
 </body>
 </html>

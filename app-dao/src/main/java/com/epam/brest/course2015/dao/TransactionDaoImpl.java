@@ -90,9 +90,9 @@ public class TransactionDaoImpl implements TransactionDao {
 //        return null;
 //    }
 
-    public List<Transaction> getFiltertransactions(Date date_from, Date date_before) {
+    public List<Transaction> getFiltertransactions(Integer id_user,Date date_from, Date date_before) {
         LOGGER.debug("getFilterTransactions");
-        return jdbcTemplate.query(tranasctionFilter, new Object[]{date_from, date_before},new BeanPropertyRowMapper<Transaction>(Transaction.class));
+        return jdbcTemplate.query(tranasctionFilter, new Object[]{date_from, date_before, id_user},new BeanPropertyRowMapper<Transaction>(Transaction.class));
     }
 
     private MapSqlParameterSource getParametersMapTransaction(Transaction transaction) {

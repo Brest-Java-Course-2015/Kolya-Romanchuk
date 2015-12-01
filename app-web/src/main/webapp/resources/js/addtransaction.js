@@ -3,26 +3,32 @@ $('#btnAddTransaction').click(function(){
 });
 
 function addTransaction() {
+    console.log($('input[name=inlineRadioOptions]:checked').val());
     console.log('addTransaction');
-    $.ajax({
-        type: 'POST',
-        contentType: 'application/json',
-        url: document.location.href+"/create",
-        dataType: "json",
-        data: formToJSON(),
-        success: function (data, textStatus, jqXHR) {
-            document.location.href="${pageContext.request.contextPath}/user"
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert('addTransaction error: ' + textStatus);
-        }
-    });
+    if($('input[name=inlineRadioOptions]:checked').val() == $('#checkRecipient').val()){
+        location.reload();
+    }else {
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json',
+            url: document.location.href+"/create",
+            dataType: "json",
+            data: formToJSON(),
+            success: function (data, textStatus, jqXHR) {
+                location.reload();
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('addTransaction error: ' + textStatus);
+            }
+        });
+    }
 }
 
 function formToJSON() {
     console.log('formToJSON');
     return JSON.stringify({
-        "checknumbersender": $('input[name=inlineRadioOptions]').val(),
+        "checknumbersender": $('input[name=inlineRadioOptions]:checked').val(),
         "checknumberrecipient": $('#checkRecipient').val(),
         "summa": $('#summa').val(),
     });

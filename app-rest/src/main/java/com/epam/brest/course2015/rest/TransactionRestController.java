@@ -46,13 +46,13 @@ public class TransactionRestController {
         return transactionService.getTransactionById(id);
     }
 
-    @RequestMapping(value = "/transactions/filter/date/{datefrom}/{datebefore}", method = RequestMethod.GET)
+    @RequestMapping(value = "/transactions/{id_user}/filter/date/{datefrom}/{datebefore}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
-    public @ResponseBody List<Transaction> getFilterTransaction(@PathVariable(value = "datefrom") String date_from, @PathVariable(value = "datebefore") String date_before) throws ParseException {
+    public @ResponseBody List<Transaction> getFilterTransaction(@PathVariable (value = "id_user") Integer id_user,@PathVariable(value = "datefrom") String date_from, @PathVariable(value = "datebefore") String date_before) throws ParseException {
         LOGGER.debug("getFilterTransaction()");
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date dateFrom= format.parse(date_from);
         Date dateBefore= format.parse(date_before);
-        return transactionService.getFiltertransactions(dateFrom,dateBefore);
+        return transactionService.getFiltertransactions(id_user,dateFrom,dateBefore);
     }
 }

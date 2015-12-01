@@ -71,12 +71,14 @@
 									<td>${users.lastname}</td>
 									<td>${users.firstname}</td>
 									<td>
+									<c:if test="${users.role == 'ROLE_USER'}">
 										<a class="btn btn-default btn-xs" href="${pageContext.request.contextPath}/admin/${users.id_user}/addcheck">
 											<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 										</a>
 										<button  class="btn btn-default btn-xs" onclick="delUser(${users.id_user});">
                                         	<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                        	</button>
+                                    </c:if>
 									</td>
 								</tr>
 							</c:forEach>

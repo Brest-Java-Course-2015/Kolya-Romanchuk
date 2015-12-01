@@ -1,36 +1,38 @@
-var PROTOCOL = "http://";
-var HOST = "localhost:8080";
-var URL_TRANSACTION_LIST = "/rest/transactions";
+$('#datepicker').datepicker({
+    format:'yyyy-mm-dd'
+});
 
-findAll();
+$('#btnFilter').click(function(){
+    filter();
+});
 
-function findAll() {
-    console.log('findAll');
+function filter() {
+    console.log('filter');
     $.ajax({
         type: 'GET',
-        url: PROTOCOL+HOST+URL_TRANSACTION_LIST,
+        url: document.location.href+"/filter/"+$('#dataFrom').val()+"/"+$('#dataBefore').val(),
         dataType: "json",
         success: renderList,
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(jqXHR, textStatus, errorThrown);
-            alert('findAll: ' + textStatus);
+            alert('filter: ' + textStatus);
         }
     });
 }
 
 function drawRow(transaction) {
     var row = $("<tr />")
-    $("#checkList").append(row);
+    $("#transactionList").append(row);
     row.append($("<td>" + transaction.checknumbersender + "</td>"));
     row.append($("<td>" + transaction.checknumberrecipient + "</td>"));
     row.append($("<td>" + transaction.summa + "</td>"));
     row.append($("<td>" + transaction.date + "</td>"));
+
 }
 
 function renderList(data) {
-    $('#checkList tr').remove();
+    $('#transactionList tr').remove();
     $.each(data, function (index, transaction) {
         drawRow(transaction);
     });
 }
-

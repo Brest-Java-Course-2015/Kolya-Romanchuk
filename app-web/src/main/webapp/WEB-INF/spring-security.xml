@@ -7,7 +7,8 @@
    			 http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
 	<http auto-config="true">
-		<intercept-url pattern="/" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/" access="hasRole('ROLE_ANONYMOUS')"/>
+		<intercept-url pattern="/login" access="hasRole('ROLE_ANONYMOUS')"/>
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/user/**" access="hasRole('ROLE_USER')"/>
 		<intercept-url pattern="resources/css/**" access="permitAll"/>
@@ -15,6 +16,7 @@
 		<intercept-url pattern="resources/fonts/**" access="permitAll"/>
 		<form-login
 		    login-page="/login"
+			default-target-url="/user" authentication-details-source-ref=""
 			authentication-failure-url="/login?error"
 			username-parameter="j_login"
 			password-parameter="j_password"

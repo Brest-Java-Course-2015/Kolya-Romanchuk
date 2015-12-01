@@ -1,5 +1,6 @@
 $('#btnAddCheck').click(function(){
     addCheck();
+    document.location="http://"+document.location.host+"/admin";
 });
 
 function addCheck() {
@@ -11,10 +12,8 @@ function addCheck() {
         dataType: "json",
         data: formToJSON(),
         success: function (data, textStatus, jqXHR) {
-            document.location.href="${pageContext.request.contextPath}/admin"
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            alert('addCheck error: ' + textStatus);
         }
     });
 }

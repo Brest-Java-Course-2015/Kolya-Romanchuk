@@ -33,7 +33,7 @@ public class TransactionServiceImpl implements TransactionService {
     public Integer addTransaction(Transaction transaction) {
         Assert.notNull(transaction, "Transaction should not be null");
         LOGGER.debug("addTransaction(): numberchecksender = {} ", transaction.getChecknumbersender());
-        Assert.isNull(transaction.getId_transaction(), "Id Transaction should be null");
+         Assert.isNull(transaction.getId_transaction(), "Id Transaction should be null");
         Assert.notNull(transaction.getChecknumbersender(), "CheckNumberSender should not be null");
         Assert.notNull(transaction.getChecknumberrecipient(), "CheckNumberRecipient should not be null");
         Assert.notNull(transaction.getSumma(), "Summa Transaction should not be null");
@@ -58,9 +58,9 @@ public class TransactionServiceImpl implements TransactionService {
         LOGGER.debug("logTransaction:  id_transaction = {} ", transaction.getId_transaction());
     }
 
-    public List<Transaction> getFiltertransactions(Date date_from, Date date_before) {
+    public List<Transaction> getFiltertransactions(Integer id_user, Date date_from, Date date_before) {
         LOGGER.debug("getFiltertransaction");
         Assert.isTrue(date_from.getTime() <= date_before.getTime(),"From Date < = Before Date");
-        return transactionDao.getFiltertransactions(date_from, date_before);
+        return transactionDao.getFiltertransactions(id_user ,date_from, date_before);
     }
 }

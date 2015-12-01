@@ -8,6 +8,8 @@
 
     <link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/dashboard.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/datepicker3.css"/>" rel="stylesheet">
+
 </head>
 <body>
 <c:if test="${pageContext.request.userPrincipal.name != null}">
@@ -52,6 +54,12 @@
             </div>
 
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <div class="uui-datepicker input-daterange input-group" id="datepicker">
+                    <input id="dataFrom" type="text" class="uui-form-element" name="start"  required autofocus/>
+                    <span class="input-group-addon">по</span>
+                    <input id="dataBefore" type="text" class="uui-form-element" name="end" required autofocus/>
+                </div>
+                <button class="btn btn-default"  id="btnFilter">Фильтровать</button>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
@@ -59,6 +67,7 @@
                             <th>Номер счета отправителя</th>
                             <th>Номер счета получателя</th>
                             <th>Сумма</th>
+                            <th>Дата</th>
                         </tr>
                         </thead>
                         <tbody id="transactionList">
@@ -67,6 +76,7 @@
                                 <td>${transactions.checknumbersender}</td>
                                 <td>${transactions.checknumberrecipient}</td>
                                 <td>${transactions.summa}</td>
+                                <td>${transactions.date}</td>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -79,5 +89,7 @@
 </c:if>
 <script src="<c:url value="/resources/js/jquery.js"/>"></script>
 <script src="<c:url value="/resources/js/bootstrap.js"/>"></script>
+<script src="<c:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
+<script src="<c:url value="/resources/js/extract.js"/>"></script>
 </body>
 </html>

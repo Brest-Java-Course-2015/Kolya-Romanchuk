@@ -34,7 +34,7 @@ public class TransactionDaoImplTest {
 
     private Integer id_user =1;
 
-    private static Transaction tran= new Transaction(null,1234,121234,1, null, 1);
+    private static Transaction tran= new Transaction(null,1234,1234,1, null, 1);
 
     @Test
     public void testGetAllTransactions() throws Exception {
@@ -75,7 +75,7 @@ public class TransactionDaoImplTest {
         Date dateBefore = format.parse(datebefore);
         LOGGER.debug(">> dateFrom = {} ", dateFrom);
         LOGGER.debug(">> dateBefore = {} ", dateBefore);
-        List<Transaction> transactions = transactionDao.getFiltertransactions(dateFrom,dateBefore);
+        List<Transaction> transactions = transactionDao.getFiltertransactions(id_user,dateFrom,dateBefore);
         assertTrue(transactions.size() == 1);
     }
 

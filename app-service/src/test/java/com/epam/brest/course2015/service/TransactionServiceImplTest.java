@@ -97,7 +97,7 @@ public class TransactionServiceImplTest {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date dateFrom= format.parse(date_from);
         Date dateBefore= format.parse(date_before);
-        transactionService.getFiltertransactions(dateFrom,dateBefore);
+        transactionService.getFiltertransactions(id_user,dateFrom,dateBefore);
     }
 
 }

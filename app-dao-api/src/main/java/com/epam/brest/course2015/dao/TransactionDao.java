@@ -15,6 +15,6 @@ public interface TransactionDao {
     public Integer addTransaction(Transaction transaction);
     public void deleteTransaction(Integer id_transaction);
     public Transaction getTransactionById(Integer id_transaction);
-    public List<Transaction> getFiltertransactions(Date date_from,Date date_before);
+    public List<Transaction> getFiltertransactions(Integer id_user, Date date_from, Date date_before);
 
 }
