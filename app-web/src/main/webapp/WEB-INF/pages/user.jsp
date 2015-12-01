@@ -26,7 +26,7 @@
         }
     </script>
     <c:if test="${pageContext.request.userPrincipal.name != null}">
-    <script> var login = "${pageContext.request.userPrincipal.name}"</script>
+    <c:set var="login" value="${pageContext.request.userPrincipal.name}"/>
 
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -38,7 +38,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a id="idLogin" value="${pageContext.request.userPrincipal.name}" class="navbar-brand">${pageContext.request.userPrincipal.name}</a>
+                <a id="idLogin" value="${pageContext.request.userPrincipal.name}" class="navbar-brand" href="${pageContext.request.contextPath}/user">${pageContext.request.userPrincipal.name}</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -53,7 +53,7 @@
     				<ul class="nav nav-sidebar">
                         <li  class="active"><a href="${pageContext.request.contextPath}/user">Счета</a></li>
                         <li><a href="${pageContext.request.contextPath}/user/${pageContext.request.userPrincipal.name}/transaction">Транзакции<span class="sr-only">(current)</span></a></li>
-                        <li><a>Выписка</a></li>
+                        <li><a href="${pageContext.request.contextPath}/user/${pageContext.request.userPrincipal.name}/extract">Выписка</a></li>
                     </ul>
     			</div>
 

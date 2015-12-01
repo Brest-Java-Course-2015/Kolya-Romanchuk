@@ -32,7 +32,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand">${pageContext.request.userPrincipal.name}</a>
+				<a class="navbar-brand" href="${pageContext.request.contextPath}/user">${pageContext.request.userPrincipal.name}</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
@@ -47,7 +47,7 @@
 				<ul class="nav nav-sidebar">
                                 <li><a href="${pageContext.request.contextPath}/user">Счета</a></li>
                                 <li class="active"><a href="${pageContext.request.contextPath}/user/${pageContext.request.userPrincipal.name}/transaction">Транзакции<span class="sr-only">(current)</span></a></li>
-                                <li><a>Выписка</a></li>
+                                <li><a href="${pageContext.request.contextPath}/user/${pageContext.request.userPrincipal.name}/extract">Выписка</a></li>
                 </ul>
 			</div>
 
@@ -65,11 +65,24 @@
 								<tr>
 									<td>${checks.checknumber}</td>
 									<td>${checks.summa}</td>
-                                    <td></td>
+                                    <td>
+										<input type="radio" name="inlineRadioOptions" id="radioCheck" value=${checks.checknumber}>
+									</td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
+					<from id="addTransaction">
+						<div class="form-user">
+							<label>Номер получателя:</label>
+							<input id="checkRecipient" name="checkRecipient" type="text">
+							<p/>
+							<label>Сумма:</label>
+							<input id="summa" name="summa" type="text">
+							<p/>
+							<button class="btn btn-primary"  id="btnAddTransaction">Перевод</button>
+						</div>
+					</from>
 				</div>
 				<hr />
 			</div>
@@ -78,5 +91,6 @@
 </c:if>
 	<script src="<c:url value="/resources/js/jquery.js"/>"></script>
     <script src="<c:url value="/resources/js/bootstrap.js"/>"></script>
+	<script src="<c:url value="/resources/js/addtransaction.js"/>"></script>
 </body>
 </html>

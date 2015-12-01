@@ -20,9 +20,9 @@ public class PagesController {
 
     @Autowired
     private CheckService checkService;
-//
-//    @Autowired
-//    private TransactionService transactionService;
+
+    @Autowired
+    private TransactionService transactionService;
 
     @RequestMapping(value = {"/login"},method = RequestMethod.GET)
     public ModelAndView loginPage(@RequestParam(value = "error", required = false) String error,
@@ -50,6 +50,21 @@ public class PagesController {
     public ModelAndView transactionPage(@PathVariable(value = "login") String login){
         List<Check> checks = checkService.getAllChecks(userService.getUserByLogin(login).getId_user());
         ModelAndView modelAndView = new ModelAndView("transaction","checks",checks);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = {"/user/{login}/transaction/create"},method = RequestMethod.POST)
+    public String addTransaction(@RequestBody Transaction transaction){
+        Integer id_check = checkService.getCheckByCheckNumder(transaction.getChecknumbersender()).getId_check();
+        transaction.setId_check(id_check);
+        transactionService.addTransaction(transaction);
+        return "redirect:/user/{login}/transaction";
+    }
+
+    @RequestMapping(value = {"/user/{login}/extract"},method = RequestMethod.GET)
+    public ModelAndView extractPage(@PathVariable(value = "login") String login){
+        List<Transaction> transactions = transactionService.getAllTransactions(userService.getUserByLogin(login).getId_user());
+        ModelAndView modelAndView = new ModelAndView("extract","transactions",transactions);
         return modelAndView;
     }
 

@@ -32,7 +32,7 @@
     					<span class="icon-bar"></span>
     					<span class="icon-bar"></span>
     				</button>
-    				<a class="navbar-brand">${pageContext.request.userPrincipal.name}</a>
+    				<a class="navbar-brand" href="${pageContext.request.contextPath}/admin">${pageContext.request.userPrincipal.name}</a>
     			</div>
     			<div id="navbar" class="navbar-collapse collapse">
     				<ul class="nav navbar-nav navbar-right">
@@ -45,7 +45,7 @@
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
-                    <li onclick="location.href='admin'"><a>Все пользователи</a></li>
+                    <li><a href="${pageContext.request.contextPath}/admin">Все пользователи</a></li>
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

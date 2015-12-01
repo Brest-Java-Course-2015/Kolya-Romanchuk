@@ -42,13 +42,13 @@
         <property name="userDao" ref="userDao"/>
     </bean>
 
-    <!--<bean id="transactionDao" class="com.epam.brest.course2015.dao.TransactionDaoImpl">-->
-        <!--<constructor-arg ref="dataSource"/>-->
-    <!--</bean>-->
+    <bean id="transactionDao" class="com.epam.brest.course2015.dao.TransactionDaoImpl">
+        <constructor-arg ref="dataSource"/>
+    </bean>
 
-    <!--<bean id="transactionService" class="com.epam.brest.course2015.service.TransactionServiceImpl">-->
-        <!--<property name="transactionDao" ref="transactionDao"/>-->
-    <!--</bean>-->
+    <bean id="transactionService" class="com.epam.brest.course2015.service.TransactionServiceImpl">
+        <property name="transactionDao" ref="transactionDao"/>
+    </bean>
 
     <bean id="checkDao" class="com.epam.brest.course2015.dao.CheckDaoImpl">
         <constructor-arg ref="dataSource"/>
