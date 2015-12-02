@@ -1,7 +1,7 @@
 $('#btnAddUser').click(function(){
 
     addUser();
-    document.location="http://"+document.location.host+"/admin";
+
 //    document.location.replace("http://"+document.location.host+"/admin");
 
 });
@@ -15,8 +15,10 @@ function addUser() {
         dataType: "json",
         data: formToJSON(),
         success: function (data, textStatus, jqXHR) {
+            document.location="http://"+document.location.host+"/admin";
         },
         error: function (jqXHR, textStatus, errorThrown) {
+            alert('Такой пользователь существует либо данные введены не корректно');
         }
     });
 }

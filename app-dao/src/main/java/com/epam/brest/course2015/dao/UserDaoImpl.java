@@ -1,6 +1,7 @@
 package com.epam.brest.course2015.dao;
 
 import com.epam.brest.course2015.domain.User;
+import com.sun.security.jgss.InquireSecContextPermission;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,6 +45,9 @@ public class UserDaoImpl implements UserDao {
     @Value("${user.selectbylogin}")
     private String userSelectByLogin;
 
+    @Value("${user.count}")
+    private String countUser;
+
     public UserDaoImpl(DataSource dataSource){
         jdbcTemplate = new JdbcTemplate(dataSource);
         namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
@@ -78,6 +82,11 @@ public class UserDaoImpl implements UserDao {
     public User getUserByLogin(String login) {
         LOGGER.debug("getUserByLogin");
         return jdbcTemplate.queryForObject(userSelectByLogin,new Object[]{login},new BeanPropertyRowMapper<User>(User.class));
+    }
+
+    public Integer countUser() {
+        LOGGER.debug("countUser");
+        return jdbcTemplate.queryForObject(countUser, Integer.class);
     }
 
     private MapSqlParameterSource getParametersMap(User user) {

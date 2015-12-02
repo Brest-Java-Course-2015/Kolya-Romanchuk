@@ -12,8 +12,8 @@ public interface UserDao {
     public List<User> getAllUsers();
     public Integer addUser(User user);
     public void deleteUser(Integer id_user);
-//    public void updateUser(User user);
     public User getUserById(Integer id_user);
     public User getUserByLogin(String login);
+    public Integer countUser();
 
 }

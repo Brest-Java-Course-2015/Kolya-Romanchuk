@@ -53,6 +53,11 @@ public class UserServiceImpl implements UserService {
         LOGGER.debug("logUser() : id_user = {} ", user.getId_user());
     }
 
+    public Integer countUser() {
+        LOGGER.debug("countuser()");
+        return userDao.countUser();
+    }
+
 
     public Integer addUser(User user) {
         Assert.notNull(user, "User should not be null.");

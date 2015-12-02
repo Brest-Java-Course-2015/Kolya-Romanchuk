@@ -31,6 +31,13 @@ public class UserRestController{
         return userService.getAllUsers();
     }
 
+    @RequestMapping(value = "/users/count", method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public @ResponseBody Integer countUser(){
+        LOGGER.debug("getAllUsers()");
+        return userService.countUser();
+    }
+
     @RequestMapping(value = "/user", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
     public @ResponseBody Integer addUser(@RequestBody User user){

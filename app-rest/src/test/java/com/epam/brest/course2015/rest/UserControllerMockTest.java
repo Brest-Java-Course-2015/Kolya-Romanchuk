@@ -77,6 +77,20 @@ public class UserControllerMockTest {
                 .andExpect(status().isOk());
     }
 
+
+    @Test
+    public void testCountUser() throws Exception {
+        expect(userService.countUser()).andReturn(2);
+        replay(userService);
+        LOGGER.debug("test: getCountUser()");
+        mockMvc.perform(
+                get("/users/count")
+                        .accept(MediaType.APPLICATION_JSON)
+        ).andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string("2"));
+    }
+
     @Test
     public void testAddUer() throws Exception{
         expect(userService.addUser(anyObject(User.class))).andReturn(2);

@@ -3,6 +3,7 @@ package com.epam.brest.course2015.controller;
 import com.epam.brest.course2015.service.*;
 import com.epam.brest.course2015.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -51,6 +52,11 @@ public class PagesController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/admin/user/count",method = RequestMethod.GET)
+    public @ResponseBody Integer countUser(){
+        return userService.countUser();
+    }
+
     @RequestMapping(value = "/user/{login}",method = RequestMethod.GET)
     public @ResponseBody List<Check> getCheck(@PathVariable(value = "login") String login){
         return checkService.getAllChecks(userService.getUserByLogin(login).getId_user());
@@ -71,8 +77,13 @@ public class PagesController {
     @RequestMapping(value = {"/user/{login}/transaction/create"},method = RequestMethod.POST)
     public @ResponseBody Integer addTransaction(@RequestBody Transaction transaction){
         Integer id_check = checkService.getCheckByCheckNumder(transaction.getChecknumbersender()).getId_check();
-        transaction.setId_check(id_check);
-        return transactionService.addTransaction(transaction);
+        Integer summa = checkService.getCheckById(id_check).getSumma();
+        if ( summa >= transaction.getSumma()){
+            transaction.setId_check(id_check);
+            return transactionService.addTransaction(transaction);
+        } else {
+            return null;
+        }
     }
 
     @RequestMapping(value = "/user/{login}/extract/filter/{datefrom}/{datebefore}",method = RequestMethod.GET)
@@ -107,9 +118,8 @@ public class PagesController {
         return modelAndView;
     }
     @RequestMapping(value = "/admin/adduser/create", method = RequestMethod.POST)
-    public String addUser(@RequestBody User user){
-        userService.addUser(user);
-        return "redirect:/admin";
+    public @ResponseBody Integer addUser(@RequestBody User user){
+        return userService.addUser(user);
 
     }
 
@@ -121,10 +131,9 @@ public class PagesController {
     }
 
     @RequestMapping(value = "/admin/{id_user}/addcheck/create", method = RequestMethod.POST)
-    public String addCheck(@RequestBody Check check,@PathVariable(value = "id_user") Integer id_user){
+    public @ResponseBody Integer addCheck(@RequestBody Check check,@PathVariable(value = "id_user") Integer id_user){
         check.setId_user(id_user);
-        checkService.addCheck(check);
-        return "redirect:/admin";
+        return checkService.addCheck(check);
     }
 
     @RequestMapping(value = "/admin/{id_user}/deleteuser",method = RequestMethod.DELETE)

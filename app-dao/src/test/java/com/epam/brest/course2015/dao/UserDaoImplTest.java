@@ -44,6 +44,13 @@ public class UserDaoImplTest {
     }
 
     @Test
+    public void testCountUser() throws Exception {
+        LOGGER.debug("test: countUser()");
+        Integer count = userDao.countUser();
+        assertTrue(count == 2);
+    }
+
+    @Test
     public void testAddUser() throws Exception {
         LOGGER.debug("test: addUser");
         Integer id_user = userDao.addUser(user);

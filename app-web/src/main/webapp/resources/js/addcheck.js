@@ -1,6 +1,6 @@
 $('#btnAddCheck').click(function(){
     addCheck();
-    document.location="http://"+document.location.host+"/admin";
+
 });
 
 function addCheck() {
@@ -12,8 +12,10 @@ function addCheck() {
         dataType: "json",
         data: formToJSON(),
         success: function (data, textStatus, jqXHR) {
+            document.location="http://"+document.location.host+"/admin";
         },
         error: function (jqXHR, textStatus, errorThrown) {
+            aler('Такой чек существует либо данные введены не корректно')
         }
     });
 }

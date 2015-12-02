@@ -80,7 +80,7 @@
 							<label>Сумма:</label>
 							<input id="summa" name="summa" type="text">
 							<p/>
-							<button class="btn btn-primary"  id="btnAddTransaction">Перевод</button>
+								<button class="btn btn-primary"  id="btnAddTransaction">Перевод</button>
 						</div>
 					</from>
 				</div>

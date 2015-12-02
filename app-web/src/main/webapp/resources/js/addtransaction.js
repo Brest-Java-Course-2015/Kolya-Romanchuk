@@ -1,5 +1,9 @@
 $('#btnAddTransaction').click(function(){
-    addTransaction();
+    if($('#checkRecipient').val() == "" || $('#summa').val() == "" ){
+        alert('есть нулевые поля');
+    } else{
+        addTransaction();
+    }
 });
 
 function addTransaction() {
@@ -19,7 +23,8 @@ function addTransaction() {
 
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert('addTransaction error: ' + textStatus);
+                alert('Счет не выбран или введен некорректный счет получателя,'+
+                'либо превышена сумма перевода ');
             }
         });
     }

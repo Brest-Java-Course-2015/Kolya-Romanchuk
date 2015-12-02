@@ -84,6 +84,9 @@
 							</c:forEach>
 						</tbody>
 					</table>
+					<p>
+						Количество пользователей: <span id="countUser"></span>
+					</p>
 				</div>
 				<hr />
 			</div>
@@ -93,5 +96,7 @@
 	<script src="<c:url value="/resources/js/jquery.js"/>"></script>
     <script src="<c:url value="/resources/js/bootstrap.js"/>"></script>
 	<script src="<c:url value="/resources/js/deluser.js"/>"></script>
+	<script src="<c:url value="/resources/js/count.js"/>"></script>
+
 </body>
 </html>
