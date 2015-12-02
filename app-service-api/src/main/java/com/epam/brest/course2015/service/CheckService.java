@@ -15,6 +15,6 @@ public interface CheckService {
 //    public void updateCheck(Check check);
     public Check getCheckById(Integer id_check);
     public Check getCheckByCheckNumder(Integer cheknumber);
-    public void logCheck(Check check);
+//    public void logCheck(Check check);
 
 }

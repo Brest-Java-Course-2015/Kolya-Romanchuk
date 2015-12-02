@@ -53,10 +53,10 @@ public class TransactionServiceImpl implements TransactionService {
         Assert.isTrue(id_transaction > 0);
         return transactionDao.getTransactionById(id_transaction);
     }
-
-    public void logTransaction(Transaction transaction) {
-        LOGGER.debug("logTransaction:  id_transaction = {} ", transaction.getId_transaction());
-    }
+//
+//    public void logTransaction(Transaction transaction) {
+//        LOGGER.debug("logTransaction:  id_transaction = {} ", transaction.getId_transaction());
+//    }
 
     public List<Transaction> getFiltertransactions(Integer id_user, Date date_from, Date date_before) {
         LOGGER.debug("getFiltertransaction");

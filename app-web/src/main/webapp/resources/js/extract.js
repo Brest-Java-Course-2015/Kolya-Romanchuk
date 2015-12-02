@@ -3,7 +3,12 @@ $('#datepicker').datepicker({
 });
 
 $('#btnFilter').click(function(){
-    filter();
+    if($('#dataFrom').val() == "" || $('#dataBefore').val()==""){
+        alert('Не введены промежутки фильтрации');
+    }else{
+        filter();
+    }
+
 });
 
 function filter() {
@@ -15,7 +20,7 @@ function filter() {
         success: renderList,
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(jqXHR, textStatus, errorThrown);
-            alert('filter: ' + textStatus);
+            alert('Ошибка');
         }
     });
 }

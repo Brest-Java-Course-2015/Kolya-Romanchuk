@@ -68,7 +68,7 @@ public class CheckServiceImpl implements CheckService {
     }
 
 
-    public void logCheck(Check check) {
-        LOGGER.debug("logCheck(): id_check = {}", check.getId_check());
-    }
+//    public void logCheck(Check check) {
+//        LOGGER.debug("logCheck(): id_check = {}", check.getId_check());
+//    }
 }

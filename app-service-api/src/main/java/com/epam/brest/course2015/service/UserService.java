@@ -14,7 +14,7 @@ public interface UserService {
     //    public void updateUser(User user);
     public User getUserById(Integer id_user);
     public User getUserByLogin(String login);
-    public void logUser(User user);
+//    public void logUser(User user);
     public Integer countUser();
 
 }

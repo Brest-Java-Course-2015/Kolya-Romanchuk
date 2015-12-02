@@ -49,9 +49,9 @@ public class UserServiceImpl implements UserService {
         return userDao.getUserByLogin(login);
     }
 
-    public void logUser(User user) {
-        LOGGER.debug("logUser() : id_user = {} ", user.getId_user());
-    }
+//    public void logUser(User user) {
+//        LOGGER.debug("logUser() : id_user = {} ", user.getId_user());
+//    }
 
     public Integer countUser() {
         LOGGER.debug("countuser()");
