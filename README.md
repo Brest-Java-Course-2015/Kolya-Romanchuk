@@ -18,8 +18,8 @@ Start web client:
     mvn jetty:run
 
 URL prefix: **localhost:8090**
-* admin page /admin or or [Sites Using React](http://kolyaromanchuk-bankaccount.rhcloud.com/bank-account-webclient/admin)
-* user page /user or [Sites Using React](http://kolyaromanchuk-bankaccount.rhcloud.com/bank-account-webclient/user)
+* admin page /admin or or [bank-account-webclient/admin](http://kolyaromanchuk-bankaccount.rhcloud.com/bank-account-webclient/admin)
+* user page /user or [bank-account-webclient/user](http://kolyaromanchuk-bankaccount.rhcloud.com/bank-account-webclient/user)
 
 Users login and password:
 * user1 user1
