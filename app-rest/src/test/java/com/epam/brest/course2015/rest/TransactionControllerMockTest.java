@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import javax.annotation.Resource;
 
 import java.util.Arrays;
+import java.util.Date;
 
 import static org.easymock.EasyMock.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -67,6 +68,26 @@ public class TransactionControllerMockTest {
 
         mockMvc.perform(get("/transactions/1").accept(MediaType.APPLICATION_JSON)).andDo(print())
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testTotalSumm() throws Exception{
+        expect(transactionService.totalSumm(anyObject(Integer.class))).andReturn(6542);
+        replay(transactionService);
+        LOGGER.debug("test: TotalSumm");
+        mockMvc.perform(get("/transaction/summ/1").accept(MediaType.APPLICATION_JSON))
+                .andDo(print()).andExpect(status().isOk());
+    }
+
+    @Test
+    public void testTotalFilterSumm() throws Exception{
+        expect(transactionService.totalFilterSumm(anyObject(Integer.class),
+                anyObject(Date.class),anyObject(Date.class)))
+                .andReturn(2000);
+        replay(transactionService);
+        LOGGER.debug("test: TotalFilterSumm");
+        mockMvc.perform(get("/transactions/summ/1/filter/date/2015-10-21/2015-10-21").accept(MediaType.APPLICATION_JSON))
+                .andDo(print()).andExpect(status().isOk());
     }
 
     @Test

@@ -34,7 +34,6 @@ public class TransactionDaoImpl implements TransactionDao {
     @Value("${check.selectbynumber}")
     private String checkSelectByNumber;
 
-
     @Value("${transaction.filter}")
     private String tranasctionFilter;
 
@@ -50,6 +49,18 @@ public class TransactionDaoImpl implements TransactionDao {
     @Value("${transaction.selectbyid}")
     private String tranasctionSelectById;
 
+    @Value("${check.summ}")
+    private String checkSumm;
+
+    @Value("${check.min}")
+    private String checkMin;
+
+    @Value("${transaction.summ}")
+    private String transactionTotalSumm;
+
+    @Value("${transaction.summfilter}")
+    private String transactionFilterSumm;
+
     public TransactionDaoImpl(DataSource dataSource){
         jdbcTemplate = new JdbcTemplate(dataSource);
         namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
@@ -60,16 +71,25 @@ public class TransactionDaoImpl implements TransactionDao {
         return jdbcTemplate.query(transactionSelect,new Object[]{id_user},new BeanPropertyRowMapper<Transaction>(Transaction.class));
     }
 
+    public Integer totalFilterSumm(Integer id_user, Date date_from, Date date_before) {
+        LOGGER.debug("totalFilterSumm");
+        return jdbcTemplate.queryForObject(transactionFilterSumm, new Object[]{date_from, date_before, id_user}, Integer.class);
+    }
+
+    public Integer totalSumm(Integer id_user){
+        LOGGER.debug("totalSumm");
+        return jdbcTemplate.queryForObject(transactionTotalSumm, new Object[]{id_user}, Integer.class);
+    }
+
     public Integer addTransaction(Transaction transaction) {
         LOGGER.debug("addTransaction");
-        Check checksender = jdbcTemplate.queryForObject(checkSelectByNumber, new Object[]{transaction.getChecknumbersender()},
-                new BeanPropertyRowMapper<Check>(Check.class));
-        Check checkrecepient = jdbcTemplate.queryForObject(checkSelectByNumber, new Object[]{transaction.getChecknumberrecipient()},
-                new BeanPropertyRowMapper<Check>(Check.class));
-        checksender.setSumma(checksender.getSumma()-transaction.getSumma());
-        checkrecepient.setSumma(checkrecepient.getSumma()+transaction.getSumma());
-        jdbcTemplate.update(checkUpdate, new Object[]{checksender.getSumma(), checksender.getId_check()});
-        jdbcTemplate.update(checkUpdate, new Object[]{checkrecepient.getSumma(), checkrecepient.getId_check()});
+        Integer summ_recipient = jdbcTemplate.queryForObject(checkSumm,new Object[]{transaction.getSumma(),
+                transaction.getChecknumberrecipient()}, Integer.class);
+        Integer summ_sender = jdbcTemplate.queryForObject(checkMin,new Object[]{transaction.getSumma(),
+                transaction.getChecknumbersender()}, Integer.class);
+
+        jdbcTemplate.update(checkUpdate, new Object[]{summ_sender, transaction.getChecknumbersender()});
+        jdbcTemplate.update(checkUpdate, new Object[]{summ_recipient, transaction.getChecknumberrecipient()});
         KeyHolder keyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(transactionInsert,getParametersMapTransaction(transaction),keyHolder);
         return keyHolder.getKey().intValue();
@@ -85,10 +105,6 @@ public class TransactionDaoImpl implements TransactionDao {
         return jdbcTemplate.queryForObject(tranasctionSelectById, new Object[]{id_transaction},
                 new BeanPropertyRowMapper<Transaction>(Transaction.class));
     }
-
-//    public List<Transaction> getFiltertransactions(Date date_from, Date date_before) {
-//        return null;
-//    }
 
     public List<Transaction> getFiltertransactions(Integer id_user,Date date_from, Date date_before) {
         LOGGER.debug("getFilterTransactions");

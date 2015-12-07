@@ -11,6 +11,8 @@ import java.util.List;
 
 public interface TransactionDao {
 
+    public Integer totalFilterSumm(Integer id_user, Date date_from, Date date_before);
+    public Integer totalSumm(Integer id_user);
     public List<Transaction> getAllTransactions(Integer id_user);
     public Integer addTransaction(Transaction transaction);
     public void deleteTransaction(Integer id_transaction);

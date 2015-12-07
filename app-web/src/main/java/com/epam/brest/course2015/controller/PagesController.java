@@ -97,6 +97,23 @@ public class PagesController {
         return transactionService.getFiltertransactions(userService.getUserByLogin(login).getId_user(), dateFrom, dateBefore);
     }
 
+    @RequestMapping(value = "/user/{login}/extract/summ", method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public @ResponseBody Integer totalSumm(@PathVariable(value = "login") String login){
+        return transactionService.totalSumm(userService.getUserByLogin(login).getId_user());
+    }
+
+    @RequestMapping(value = "/user/{login}/extract/summ/{datefrom}/{datebefore}", method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public @ResponseBody Integer totalFilterSumm(@PathVariable (value = "login") String login,
+                                                 @PathVariable(value = "datefrom") String date_from,
+                                                 @PathVariable(value = "datebefore") String date_before) throws ParseException{
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateFrom= format.parse(date_from);
+        Date dateBefore= format.parse(date_before);
+        return transactionService.totalFilterSumm(userService.getUserByLogin(login).getId_user(), dateFrom,dateBefore);
+    }
+
     @RequestMapping(value = {"/user/{login}/extract"},method = RequestMethod.GET)
     public ModelAndView extractPage(@PathVariable(value = "login") String login){
         List<Transaction> transactions = transactionService.getAllTransactions(userService.getUserByLogin(login).getId_user());

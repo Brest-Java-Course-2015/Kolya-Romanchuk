@@ -81,6 +81,9 @@
                         </c:forEach>
                         </tbody>
                     </table>
+                    <p>
+                        Общая сумма переводов: <span id="totalSumm"></span>
+                    </p>
                 </div>
                 <hr />
             </div>

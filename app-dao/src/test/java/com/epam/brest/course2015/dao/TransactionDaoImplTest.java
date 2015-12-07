@@ -44,6 +44,27 @@ public class TransactionDaoImplTest {
     }
 
     @Test
+    public void testTotalSumm(){
+        LOGGER.debug("test: totalSumm");
+        Integer summa = transactionDao.totalSumm(id_user);
+        assertTrue(summa == 6542);
+    }
+
+    @Test
+    public void testTotalFilterSumm() throws Exception{
+        LOGGER.debug("test: TotalFilterSumm");
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String datefrom = "2015-10-21";
+        String datebefore = "2015-10-21";
+        Date dateFrom = format.parse(datefrom);
+        Date dateBefore = format.parse(datebefore);
+        LOGGER.debug(">> dateFrom = {} ", dateFrom);
+        LOGGER.debug(">> dateBefore = {} ", dateBefore);
+        Integer summa = transactionDao.totalFilterSumm(id_user,dateFrom,dateBefore);
+        assertTrue(summa == 2000);
+    }
+
+    @Test
     public void testAddTransaction() throws Exception {
         LOGGER.debug("test: addTransaction");
         Integer id_transaction = transactionDao.addTransaction(tran);

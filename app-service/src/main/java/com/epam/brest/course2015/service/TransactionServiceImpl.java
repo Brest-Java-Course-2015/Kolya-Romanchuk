@@ -25,6 +25,21 @@ public class TransactionServiceImpl implements TransactionService {
         this.transactionDao = transactionDao;
     }
 
+    public Integer totalFilterSumm(Integer id_user, Date date_from, Date date_before) {
+        LOGGER.debug("totalFilterSum");
+        Assert.notNull(id_user,"Id user should not be null");
+        Assert.notNull(date_from,"Data From should not be null");
+        Assert.notNull(date_before, "Data Before should not be null");
+        Assert.isTrue(date_from.getTime() <= date_before.getTime(),"From Date < = Before Date");
+        return transactionDao.totalFilterSumm(id_user,date_from,date_before);
+    }
+
+    public Integer totalSumm(Integer id_user) {
+        LOGGER.debug("totalSum");
+        Assert.notNull(id_user,"Id user should not be null");
+        return transactionDao.totalSumm(id_user);
+    }
+
     public List<Transaction> getAllTransactions(Integer id_user) {
         LOGGER.debug("getAllTransaction()");
         return transactionDao.getAllTransactions(id_user);
@@ -60,6 +75,9 @@ public class TransactionServiceImpl implements TransactionService {
 
     public List<Transaction> getFiltertransactions(Integer id_user, Date date_from, Date date_before) {
         LOGGER.debug("getFiltertransaction");
+        Assert.notNull(id_user,"Id user should not be null");
+        Assert.notNull(date_from,"Data From should not be null");
+        Assert.notNull(date_before, "Data Before should not be null");
         Assert.isTrue(date_from.getTime() <= date_before.getTime(),"From Date < = Before Date");
         return transactionDao.getFiltertransactions(id_user ,date_from, date_before);
     }
