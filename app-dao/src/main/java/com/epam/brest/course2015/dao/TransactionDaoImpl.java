@@ -43,9 +43,6 @@ public class TransactionDaoImpl implements TransactionDao {
     @Value("${transaction.select}")
     private String transactionSelect;
 
-    @Value("${transaction.delete}")
-    private String transactionDelete;
-
     @Value("${transaction.selectbyid}")
     private String tranasctionSelectById;
 
@@ -93,11 +90,6 @@ public class TransactionDaoImpl implements TransactionDao {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(transactionInsert,getParametersMapTransaction(transaction),keyHolder);
         return keyHolder.getKey().intValue();
-    }
-
-    public void deleteTransaction(Integer id_transaction) {
-        LOGGER.debug("deleteTransaction");
-        jdbcTemplate.update(transactionDelete, new Object[]{id_transaction});
     }
 
     public Transaction getTransactionById(Integer id_transaction) {

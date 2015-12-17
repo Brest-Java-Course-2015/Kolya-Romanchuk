@@ -14,7 +14,6 @@ public interface TransactionService {
     public Integer totalSumm(Integer id_user);
     public List<Transaction> getAllTransactions(Integer id_user);
     public Integer addTransaction(Transaction transaction);
-    public void deleteTransaction(Integer id_transaction);
     public Transaction getTransactionById(Integer id_transaction);
     public List<Transaction> getFiltertransactions(Integer id_user ,Date date_from, Date date_before);
 }

@@ -55,13 +55,6 @@ public class TransactionServiceImpl implements TransactionService {
         return transactionDao.addTransaction(transaction);
     }
 
-    public void deleteTransaction(Integer id_transaction) {
-        LOGGER.debug("deleteTransaction(): id_transaction = {} ", id_transaction);
-        Assert.notNull(id_transaction, "Id Transaction should not be null");
-        Assert.isTrue(id_transaction > 0);
-        transactionDao.deleteTransaction(id_transaction);
-    }
-
     public Transaction getTransactionById(Integer id_transaction) {
         LOGGER.debug("gettransactionById: id_transaction = {} ",id_transaction);
         Assert.notNull(id_transaction, "Id Transaction should not be null");

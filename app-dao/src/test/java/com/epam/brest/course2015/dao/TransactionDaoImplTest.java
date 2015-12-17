@@ -40,6 +40,7 @@ public class TransactionDaoImplTest {
     public void testGetAllTransactions() throws Exception {
         LOGGER.debug("test: getAllTransactions");
         List<Transaction> transactions = transactionDao.getAllTransactions(id_user);
+        LOGGER.debug(">> size = {} ",transactions.size());
         assertTrue(transactions.size() == 2);
     }
 
@@ -74,16 +75,6 @@ public class TransactionDaoImplTest {
         List<Transaction> transactions = transactionDao.getAllTransactions(id_user);
         assertTrue(transactions.size() == 3);
 
-    }
-
-    @Test
-    public void testDeleteTransaction() throws Exception {
-        LOGGER.debug("test: deleteTransaction");
-        List<Transaction> transactions = transactionDao.getAllTransactions(id_user);
-        assertTrue(transactions.size() > 0);
-        int sizeBefore = transactions.size();
-        transactionDao.deleteTransaction(transactions.get(0).getId_transaction());
-        assertTrue((sizeBefore - 1) == transactionDao.getAllTransactions(id_user).size());
     }
 
     @Test
