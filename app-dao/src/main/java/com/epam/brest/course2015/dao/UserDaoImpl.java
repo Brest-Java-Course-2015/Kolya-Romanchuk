@@ -1,5 +1,6 @@
 package com.epam.brest.course2015.dao;
 
+import com.epam.brest.course2015.domain.Transaction;
 import com.epam.brest.course2015.domain.User;
 import com.sun.security.jgss.InquireSecContextPermission;
 import org.apache.logging.log4j.LogManager;
@@ -30,6 +31,9 @@ public class UserDaoImpl implements UserDao {
     @Value("${user.select}")
     private String userSelect;
 
+    @Value("${transaction.select}")
+    private String transactionSelect;
+
     @Value("${user.insert}")
     private String userInsert;
 
@@ -41,6 +45,12 @@ public class UserDaoImpl implements UserDao {
 
     @Value("${user.delete}")
     private String userDelete;
+
+    @Value("${transaction.delete}")
+    private String transactionDelete;
+
+    @Value("${check.delete}")
+    private String checkDelete;
 
     @Value("${user.selectbylogin}")
     private String userSelectByLogin;
@@ -67,12 +77,17 @@ public class UserDaoImpl implements UserDao {
 
     public void deleteUser(Integer id_user) {
         LOGGER.debug("deleteUser");
+        List<Transaction> transactions = jdbcTemplate.query(transactionSelect, new Object[]{id_user},
+                new BeanPropertyRowMapper<Transaction>(Transaction.class));
+        if (transactions.size() != 0) {
+            for (int i = 0; i < transactions.size(); i++)
+                jdbcTemplate.update(transactionDelete, new Object[]{transactions.get(i).getId_transaction()});
+        }
+
+        jdbcTemplate.update(checkDelete, new Object[]{id_user});
+
         jdbcTemplate.update(userDelete,new Object[]{id_user});
     }
-
-//    public void updateUser(User user) {
-//
-//    }
 
     public User getUserById(Integer id_user) {
         LOGGER.debug("getUserById");

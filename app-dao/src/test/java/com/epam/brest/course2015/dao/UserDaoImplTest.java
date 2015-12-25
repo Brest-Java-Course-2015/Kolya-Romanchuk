@@ -29,6 +29,7 @@ public class UserDaoImplTest {
 
     private final String LOGIN = "login1";
 
+    private Integer ID_USER = 1;
 
     @Autowired
     private UserDao userDao;
